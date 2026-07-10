@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北海道夏季五日行程｜7/21–7/25 騎好騎滿版</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;600;700&family=Shippori+Mincho:wght@500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F0F3EA;
+    --paper:#FFFFFF;
+    --forest:#2E4A3B;
+    --forest-light:#4C6E57;
+    --lavender:#6E5A93;
+    --lavender-light:#9683BC;
+    --wheat:#C99A44;
+    --sky:#3E7CA6;
+    --ink:#26241F;
+    --ink-soft:#5C5A50;
+    --line:#D9D3C4;
+    --accent:#B65C3C;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Noto Sans TC',sans-serif;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:'Noto Serif TC',serif;color:var(--forest);}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px;}
+
+  /* NAV */
+  nav.stationnav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(240,243,234,0.92);backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .navrow{
+    max-width:920px;margin:0 auto;padding:10px 24px;
+    display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;
+  }
+  .navrow::-webkit-scrollbar{display:none;}
+  .navrow a{
+    flex:0 0 auto;font-size:12.5px;font-weight:600;
+    padding:7px 13px;border-radius:999px;white-space:nowrap;
+    color:var(--forest);text-decoration:none;border:1px solid transparent;
+  }
+  .navrow a:hover{border-color:var(--forest);}
+
+  /* HERO */
+  header.hero{
+    background:var(--forest);color:#F3EFE2;position:relative;overflow:hidden;
+    padding:48px 0 0;
+  }
+  .hero-inner{max-width:920px;margin:0 auto;padding:0 24px 36px;position:relative;z-index:2;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--wheat);margin-bottom:16px;display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:'';width:26px;height:1px;background:var(--wheat);display:inline-block;}
+  h1.title{font-size:clamp(30px,5.5vw,48px);color:#FBF8F0;line-height:1.25;font-weight:700;}
+  h1.title em{font-style:normal;color:var(--wheat);}
+  .subtitle{margin-top:14px;font-size:16px;color:#D7DED0;max-width:60ch;}
+  .hero-meta{
+    margin-top:30px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:rgba(255,255,255,0.14);border-radius:var(--radius);overflow:hidden;
+  }
+  .hero-meta div{background:rgba(255,255,255,0.045);padding:14px 16px;}
+  .hero-meta .k{font-size:11px;letter-spacing:.06em;color:#B9C4AF;font-family:'JetBrains Mono',monospace;}
+  .hero-meta .v{margin-top:4px;font-size:14px;color:#F3EFE2;font-weight:600;}
+  @media(max-width:640px){.hero-meta{grid-template-columns:1fr 1fr;}}
+
+  /* SECTION */
+  section{padding:52px 0;}
+  section.alt{background:#E7ECDF;}
+  .sec-head{margin-bottom:28px;}
+  .sec-head .tag{
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.12em;
+    color:var(--lavender);text-transform:uppercase;margin-bottom:8px;display:block;
+  }
+  .sec-head h2{font-size:clamp(22px,3.6vw,30px);}
+  .sec-head p.lede{margin-top:8px;color:var(--ink-soft);font-size:15px;max-width:62ch;}
+
+  /* CARDS */
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:640px){.cards{grid-template-columns:1fr;}}
+  .card{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 20px 22px;
+  }
+  .card h3{font-size:17px;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card h3 .num{
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--forest);
+    background:var(--cream);border:1px solid var(--line);border-radius:6px;
+    padding:2px 7px;
+  }
+  .card ol,.card ul{margin:0;padding-left:20px;color:var(--ink-soft);font-size:14.5px;}
+  .card li{margin-bottom:7px;}
+  .card p{color:var(--ink-soft);font-size:14.5px;margin:0 0 8px;}
+  .card .note{
+    margin-top:12px;font-size:13px;color:var(--forest-light);
+    background:var(--cream);border-left:3px solid var(--wheat);padding:8px 12px;border-radius:6px;
+  }
+  .card .note.warn{border-left-color:var(--accent);background:#FFF5F0;}
+
+  /* TABLE */
+  .ov-table{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);}
+  .ov-table th,.ov-table td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);}
+  .ov-table th{background:var(--forest);color:#F3EFE2;font-weight:500;font-size:12px;letter-spacing:.05em;}
+  .ov-table tr:last-child td{border-bottom:none;}
+  .ov-table td.date{font-family:'JetBrains Mono',monospace;color:var(--forest);font-weight:600;white-space:nowrap;font-size:13px;}
+  .pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:999px;font-weight:600;}
+  .pill.bike{background:#E4DEF0;color:var(--lavender);}
+  .pill.biei{background:#DCEAF2;color:var(--sky);}
+  .pill.sapporo{background:#F5E6D3;color:#8B6914;}
+  @media(max-width:640px){.ov-table{display:block;overflow-x:auto;white-space:nowrap;}}
+
+  /* CHECKLIST */
+  .checklist{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media(max-width:640px){.checklist{grid-template-columns:1fr;}}
+  .checklist li{
+    display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--ink-soft);
+    background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 13px;
+  }
+  .checklist li::before{
+    content:'';flex:0 0 auto;width:16px;height:16px;margin-top:3px;border-radius:4px;
+    border:2px solid var(--forest-light);
+  }
+
+  /* RAIL TIMELINE */
+  .rail{position:relative;}
+  .rail::before{
+    content:'';position:absolute;left:26px;top:6px;bottom:6px;width:2px;
+    background-image:linear-gradient(var(--forest-light) 60%,rgba(0,0,0,0) 0%);
+    background-size:2px 12px;background-repeat:repeat-y;
+  }
+  @media(max-width:640px){.rail::before{left:16px;}}
+  .stop{position:relative;padding-left:64px;margin-bottom:48px;}
+  @media(max-width:640px){.stop{padding-left:44px;}}
+  .stop:last-child{margin-bottom:0;}
+  .stop .node{
+    position:absolute;left:12px;top:0;width:30px;height:30px;border-radius:50%;
+    background:var(--forest);border:4px solid var(--cream);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:#F3EFE2;font-weight:700;
+    box-shadow:0 0 0 2px var(--forest-light);
+  }
+  @media(max-width:640px){.stop .node{left:2px;width:26px;height:26px;font-size:10.5px;}}
+  .stop-head{margin-bottom:14px;}
+  .stop-head .stop-date{
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--lavender);
+    letter-spacing:.06em;text-transform:uppercase;
+  }
+  .stop-head h3{font-size:clamp(18px,3vw,24px);margin-top:4px;}
+  .stop-head .stop-sub{color:var(--ink-soft);font-size:14px;margin-top:5px;}
+  .stop-head .stay-tag{
+    display:inline-flex;align-items:center;gap:6px;margin-top:8px;
+    font-size:12px;background:var(--paper);border:1px solid var(--line);
+    padding:4px 10px;border-radius:999px;color:var(--forest);
+  }
+  .stop-head .mile-tag{
+    display:inline-flex;align-items:center;gap:4px;
+    font-size:11.5px;font-family:'JetBrains Mono',monospace;
+    color:var(--lavender);margin-left:10px;
+  }
+
+  /* SCHEDULE STRIP */
+  .schedule{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:14px;}
+  .schedule .row{display:flex;gap:14px;padding:11px 16px;border-bottom:1px solid var(--line);align-items:flex-start;}
+  .schedule .row:last-child{border-bottom:none;}
+  .schedule .time{
+    flex:0 0 72px;font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;color:var(--forest);padding-top:2px;
+  }
+  .schedule .desc{flex:1;font-size:14px;color:var(--ink);}
+  .schedule .desc .sub{display:block;color:var(--ink-soft);font-size:12.5px;margin-top:2px;}
+
+  /* TRANSIT STEPS */
+  .steps{
+    background:#FAF8F2;border:1px dashed var(--wheat);border-radius:var(--radius);
+    padding:16px 18px;margin-bottom:14px;
+  }
+  .steps h4{
+    font-size:12.5px;font-family:'JetBrains Mono',monospace;letter-spacing:.05em;
+    color:var(--wheat);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;
+  }
+  .steps ol{margin:0;padding-left:18px;}
+  .steps li{margin-bottom:8px;font-size:14px;color:var(--ink);}
+  .steps li b{color:var(--forest);}
+  .steps li:last-child{margin-bottom:0;}
+
+  .tip{
+    font-size:13px;color:var(--ink-soft);background:var(--cream);
+    border-left:3px solid var(--sky);padding:8px 12px;border-radius:6px;margin-top:3px;
+  }
+  .tip.warn{border-left-color:var(--accent);}
+  .tip.bike{border-left-color:var(--lavender);}
+  .tip b{color:var(--forest);}
+
+  .map-link{display:inline-block;font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--sapporo);margin-top:6px;text-decoration:none;border-bottom:1px dashed var(--sapporo);}
+  .map-link:hover{color:#1a5276;border-bottom-style:solid;}
+
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:640px){.two-col{grid-template-columns:1fr;}}
+
+  /* GRADIENT REFERENCE */
+  .gradient-box{background:#F8FAF5;border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin-bottom:16px;}
+  .gradient-box h4{font-size:13px;font-family:'JetBrains Mono',monospace;color:var(--forest);margin-bottom:12px;}
+
+  /* ROUTE MAP */
+  .route-box{
+    background:#F4F0E8;padding:14px 16px;border-radius:var(--radius);
+    border:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:13px;
+    line-height:1.7;white-space:pre-wrap;overflow-x:auto;
+  }
+  .elev-box{
+    background:#F4F0E8;padding:14px 16px;border-radius:var(--radius);
+    border:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:11.5px;
+    line-height:1.4;white-space:pre-wrap;overflow-x:auto;
+  }
+
+  /* PHRASE CARDS */
+  .phrase-group{margin-bottom:30px;}
+  .phrase-group:last-child{margin-bottom:0;}
+  .phrase-group h4{
+    font-size:12.5px;font-family:'JetBrains Mono',monospace;color:var(--lavender);
+    letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;
+  }
+  .phrase-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media(max-width:640px){.phrase-grid{grid-template-columns:1fr;}}
+  .phrase-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 18px;
+  }
+  .phrase-jp{
+    font-family:'Shippori Mincho',serif;font-size:20px;color:var(--forest);
+    line-height:2.1;
+  }
+  .phrase-jp ruby rt{
+    font-family:'Noto Sans TC',sans-serif;font-size:10px;color:var(--ink-soft);
+  }
+  .phrase-romaji{
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--sky);margin-top:2px;
+  }
+  .phrase-zh{font-size:13px;color:var(--ink-soft);margin-top:6px;}
+
+  /* EMERGENCY GRID */
+  .em-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media(max-width:640px){.em-grid{grid-template-columns:1fr;}}
+  .em-item{
+    background:#FFF5F0;border-left:3px solid var(--accent);
+    padding:10px 14px;border-radius:0 8px 8px 0;
+  }
+  .em-item strong{display:block;font-size:14px;color:var(--ink);}
+  .em-item .num{font-size:20px;font-weight:700;color:var(--accent);font-family:'JetBrains Mono',monospace;}
+
+  /* FOOTER */
+  footer{background:var(--forest);color:#C9D2C0;padding:36px 0 40px;}
+  footer .wrap{font-size:12.5px;line-height:1.8;}
+  footer h5{color:#F3EFE2;font-family:'Noto Serif TC',serif;font-size:14px;margin-bottom:8px;}
+  a.backtop{
+    display:inline-block;margin-top:20px;font-size:12px;font-family:'JetBrains Mono',monospace;
+    color:var(--wheat);text-decoration:none;border-bottom:1px solid transparent;
+  }
+  a.backtop:hover{border-color:var(--wheat);}
+</style>
+</head>
+<body>
+
+<nav class="stationnav">
+  <div class="navrow">
+    <a href="#overview">總覽</a>
+    <a href="#prep">行前準備</a>
+    <a href="#routes">騎行路線</a>
+    <a href="#day1">Day1 抵達</a>
+    <a href="#day2">Day2 景觀→青池</a>
+    <a href="#day3">Day3 富田農場</a>
+    <a href="#day4">Day4 拼布→札幌</a>
+    <a href="#day5">Day5 返程</a>
+    <a href="#appendix">附錄</a>
+    <a href="#phrases">日語小抄</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Hokkaido Summer ／ 7.21 – 7.25</span>
+    <h1 class="title">美瑛に泊まって、<br>丘を<em>自転車</em>で駆け抜ける。</h1>
+    <p class="subtitle">三天騎行合計破百公里：拼布之路、富田農場來回、景觀之路直上青池。以緩慢北海道為根據地，最後一夜交給札幌市區。給第一次自助、體力充足的你。</p>
+    <div class="hero-meta">
+      <div><div class="k">美瑛據點</div><div class="v">緩慢北海道 3 晚</div></div>
+      <div><div class="k">札幌收尾</div><div class="v">Vessel Inn 1 晚</div></div>
+      <div><div class="k">騎行總里程</div><div class="v">~100-105km</div></div>
+      <div><div class="k">交通核心</div><div class="v">JR 富良野区域 4 日券</div></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ OVERVIEW ============ -->
+<section id="overview">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Route Map</span>
+      <h2>五天總覽</h2>
+      <p class="lede">下午班機抵達新千歲、上午班機返台。前三天以美瑛為中心騎腳踏車，第四天移動至札幌。函館單程車程超過 4.5 小時，這趟先割愛。</p>
+    </div>
+    <table class="ov-table">
+      <thead><tr><th>日期</th><th>重點</th><th>住宿</th></tr></thead>
+      <tbody>
+        <tr><td class="date">7/21（二）</td><td>新千歲機場 → JR 移動 → 美瑛入住</td><td><span class="pill biei">緩慢北海道</span></td></tr>
+        <tr><td class="date">7/22（三）</td><td>🚲🏞️ 景觀之路→青池（~35km）</td><td><span class="pill biei">緩慢北海道</span></td></tr>
+        <tr><td class="date">7/23（四）</td><td>🚲💜 騎去富田農場來回（~50km）</td><td><span class="pill biei">緩慢北海道</span></td></tr>
+        <tr><td class="date">7/24（五）</td><td>🚲 拼布之路（~18km 環狀）→ JR 往札幌</td><td><span class="pill sapporo">Vessel Inn</span></td></tr>
+        <tr><td class="date">7/25（六）</td><td>札幌市區 → 新千歲機場 → 回台</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ PREP ============ -->
+<section id="prep" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Before You Fly</span>
+      <h2>行前準備：入境與車票</h2>
+      <p class="lede">兩件事最容易在出發前被忽略——Visit Japan Web 的 QR code，以及 JR Pass 的實體兌換。提早處理，落地才不手忙腳亂。</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <h3><span class="num">01</span> Visit Japan Web</h3>
+        <ol>
+          <li>至 vjw.digital.go.jp 建立帳號，用 Email 收驗證碼完成註冊。</li>
+          <li>登錄「本人資料」：照護照輸入姓名、出生日期、護照號碼。</li>
+          <li>登錄「入境・回國預定」：填入航班、抵達日期、第一晚住宿地址（<b>緩慢北海道：〒071-0240 北海道上川郡美瑛町字みどり</b>）。</li>
+          <li>完成「檢疫」與「海關申報」問答，誠實回答即可。</li>
+          <li>按下登錄，產生入境審查＋海關申報的 QR code，<b>截圖存進手機</b>。</li>
+        </ol>
+        <div class="note">建議起飛前 1–2 天就填好。台灣護照赴日免簽，VISA 欄位不用填。同行家人可綁同一帳號。</div>
+      </div>
+      <div class="card">
+        <h3><span class="num">02</span> JR Pass 兌換</h3>
+        <ol>
+          <li>落地後前往 JR 新千歲空港駅（地下 B1，往車站方向）。</li>
+          <li>找到「JR 外籍旅客服務處」或黑色自動售票機（可掃 QR Code 取票）。</li>
+          <li>出示手機 QR Code + 護照 → 兌換實體周遊券。</li>
+          <li>指定啟用日期：<b>7 月 21 日</b>。</li>
+          <li>可用售票機或櫃檯<b>免費劃指定席</b>（特急 Kamui/Lilac 建議先劃）。</li>
+        </ol>
+        <div class="note">富良野・美瑛慢車號（ノロッコ号）全車指定席，務必提早劃位。Pass 連續 4 天有效（7/21–7/24），7/25 札幌→機場單買約 ¥1,150。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ROUTES ============ -->
+<section id="routes">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Cycling Routes</span>
+      <h2>騎行路線與高度總覽</h2>
+      <p class="lede">三天騎行超過 100km。三條路線的相對位置如下——拼布之路在美瑛駅西北、景觀之路向東南延伸、富田農場沿國道 237 一路向南。</p>
+    </div>
+
+    <!-- Location Map -->
+    <div class="card">
+      <h3>📍 三條路線相對位置示意</h3>
+      <div class="route-box" style="font-size:13px;line-height:1.5;font-family:JetBrains Mono,monospace;">　　　　　　　　　　　　　　　日文：パッチワークの路
+　　　　　　　　　 北西之丘　　Day 4 ↺ 拼布之路
+　　　　　　　　　 　 　↗　　　 ~18km / ↑120m
+　　　　　　　　 Ken & Mary 之木
+　　　　　　　　　 　 　│
+　　　　　　　　　 美瑛駅 ●────── 旭川方面（JR）
+　　　　　　　　　 　 　│
+　　　　　　 四季彩之丘 ─┤ 　　 日文：パノラマロード
+　　　　　　　 　 　 　│　　　 Day 2 ↺ 景觀之路 → 青池
+　　　　　　　　　 　 青池 ┘　　　 ~35km / ↑220m
+　　　　　　　　　 　 　 　 　 　 　（四季彩→青池爬坡最硬）
+　　　　　　　　　 　 　 　 　 　 　 回程全程下坡！
+　　　　　　　 　 ↓ 國道 237
+　　　　　　　 中富良野
+　　　　　　　 　 　 　 　 日文：ファーム富田
+　　　　　　　 富田農場 ●　 Day 3 ↓↓ 來回
+　　　　　　　 ラベンダー畑駅 　 ~50km / ↑80m→↓150m←
+　　　　　　　 　 　 　 　 　 　 （幾乎平的）</div>
+      <div class="note">↑ 簡易方位示意，非實際比例。三條路線起點皆為美瑛駅。數字 = 里程 / 累積爬升。</div>
+    </div>
+
+    </div>
+
+    <!-- Route 1 -->
+  <div class="wrap">
+    <div class="card">
+      <h3>🚲 拼布之路（Day 4）<span class="mile-tag">~18km ↑120m</span></h3>
+      <p>環狀路線，美瑛駅西北側。最大坡度 1.5%，電動車像在公園騎。</p>
+      <table class="ov-table" style="font-size:12.5px;">
+        <thead><tr><th>區段</th><th>距離</th><th>爬升</th><th>坡度</th></tr></thead>
+        <tbody>
+          <tr><td>美瑛駅→Ken & Mary</td><td>3km</td><td>↑~25m</td><td>~0.8%</td></tr>
+          <tr><td>→ Seven Star</td><td>1.5km</td><td>↑~5m</td><td>~0.3%</td></tr>
+          <tr><td>→ 親子之木</td><td>2km</td><td>↑~30m</td><td>~1.5%</td></tr>
+          <tr><td>→ 北西之丘</td><td>2km</td><td>↓~20m</td><td>~-1%</td></tr>
+          <tr><td>→ 美瑛駅</td><td>5km</td><td>↓~40m</td><td>~-0.8%</td></tr>
+        </tbody>
+      </table>
+    </div>
+   </div>
+
+    <!-- Route 2 -->
+  <div class="wrap">
+    <div class="card">
+      <h3>🚲 美瑛→富田農場（Day 3）<span class="mile-tag">~50km ↑80m→↓150m←</span></h3>
+      <p>沿國道237向南，來回折返。幾乎全平，只是 50km 較長。</p>
+      <table class="ov-table" style="font-size:12.5px;">
+        <thead><tr><th>區段</th><th>距離</th><th>爬升</th><th>坡度</th></tr></thead>
+        <tbody>
+          <tr><td>美瑛駅→美瑛市區南</td><td>3km</td><td>↓~5m</td><td>~-0.2%</td></tr>
+          <tr><td>→美馬牛路口</td><td>8km</td><td>↓~20m</td><td>~-0.25%</td></tr>
+          <tr><td>→中富良野</td><td>8km</td><td>↓~20m</td><td>~-0.25%</td></tr>
+          <tr><td>→富田農場</td><td>5km</td><td>↑~5m</td><td>~0.1%</td></tr>
+          <tr><td><b>回程</b></td><td><b>24km</b></td><td><b>↑~50m</b></td><td><b>~0.2% 幾乎平的</b></td></tr>
+        </tbody>
+      </table>
+      <div class="note">體力備案：回程可從富良野駅搭 JR 回美瑛駅（30 分）。</div>
+    </div>
+    </div
+
+    <!-- Route 3 -->
+  <div class="wrap">
+    <div class="card">
+      <h3>🚲 景觀之路 → 青池（Day 2）<span class="mile-tag">~35km ↑220m</span></h3>
+      <p>美瑛駅東南 → 四季彩之丘 → 青池 → 原路折返。四季彩→青池的 8km 是三天唯一有感爬坡。</p>
+      <table class="ov-table" style="font-size:12.5px;">
+        <thead><tr><th>區段</th><th>距離</th><th>爬升</th><th>坡度</th></tr></thead>
+        <tbody>
+          <tr><td>美瑛駅→三愛之丘</td><td>3.5km</td><td>↑~35m</td><td>~1.0%</td></tr>
+          <tr><td>→四季彩之丘</td><td>4.5km</td><td>起伏 ±30m</td><td>0-2%</td></tr>
+          <tr><td><b>→青池</b></td><td><b>8km</b></td><td><b>↑~150m</b></td><td><b>平均~1.9%（最陡 4-5%）</b></td></tr>
+          <tr><td>→白鬚瀑布</td><td>0.5km</td><td>—</td><td>徒步即達</td></tr>
+          <tr><td><b>回程→美瑛駅</b></td><td><b>16km</b></td><td><b>↓~210m</b></td><td><b>~-1.3% 一路下坡 🎉</b></td></tr>
+        </tbody>
+      </table>
+      <div class="note warn">四季彩→青池 8km 爬升 150m 是三天最操的一段，但電動車標準模式就夠。爬上去後回程 16km 幾乎全下坡，超爽快。</div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- ============ DAYS ============ -->
+<section class="alt" id="days">
+  <div class="wrap rail">
+
+    <!-- DAY 1 -->
+    <div class="stop" id="day1">
+      <div class="node">1</div>
+      <div class="stop-head">
+        <div class="stop-date">7/21（二）</div>
+        <h3>新千歲機場抵達 → 美瑛入住</h3>
+        <p class="stop-sub">下午班機落地，出關後直接北上，晚間抵達美瑛。</p>
+        <span class="stay-tag">🏡 緩慢北海道 Adagio Hokkaido（第 1 晚）</span>
+      </div>
+      <div class="schedule">
+        <div class="row"><div class="time">抵達後</div><div class="desc">出關（出示 VJW QR）→ 領行李 → B1 JR 駅兌換 Pass<span class="sub">預留 40-60 分鐘</span></div></div>
+        <div class="row"><div class="time">移動</div><div class="desc">JR 快速 Airport（37 分）→ 札幌 → 特急 Kamui/Lilac（90 分）→ 旭川 → 普通列車（30 分）→ 美瑛<span class="sub">全程含轉乘約 2.5-3 小時</span></div></div>
+        <div class="row"><div class="time">入住</div><div class="desc">緩慢北海道接駁車（15:20/16:20/17:20，需預約）或計程車（¥1,000-1,500）<span class="sub">晚餐建議吃民宿無菜單料理，周邊無餐廳</span></div></div>
+      </div>
+      <div class="steps">
+        <h4>交通 Step-by-Step</h4>
+        <ol>
+          <li><b>新千歲空港駅</b> → 快速 Airport 號 → <b>札幌駅</b>（37 分）。</li>
+          <li>轉乘特急 <b>Lilac／Kamui 號</b> → <b>旭川駅</b>（90 分，建議先劃指定席）。</li>
+          <li>轉 JR 富良野線普通列車 → <b>美瑛駅</b>（30 分）。</li>
+          <li>美瑛駅 → 預約接駁車（15:20/16:20/17:20）或計程車至緩慢北海道。</li>
+        </ol>
+        <div class="tip">接駁車預約：入住前 2 天打電話 +81-166-92-5513 或訂房平台備註。</div>
+        <div class="tip warn"><b>若錯過末班接駁：</b>搭計程車約 6 分，¥1,000-1,500。</div>
+      </div>
+    </div>
+
+    <!-- DAY 2 -->
+    <div class="stop" id="day2">
+      <div class="node">2</div>
+      <div class="stop-head">
+        <div class="stop-date">7/22（三）</div>
+        <h3>🚲🏞️ 景觀之路 → 青池</h3>
+        <p class="stop-sub">~35km 有爬坡有下坡，美瑛的精華都在這一天。整天的時間慢慢騎。</p>
+        <span class="stay-tag">🏡 緩慢北海道（第 2 晚）<span class="mile-tag" style="margin-left:12px;">🚲 ~35km</span></span>
+      </div>
+      <div class="schedule">
+        <div class="row"><div class="time">09:00</div><div class="desc">緩慢接駁車 → 美瑛駅（09:30 發車）</div></div>
+        <div class="row"><div class="time">09:30</div><div class="desc">BIEI HILLS 租電動腳踏車（¥600/h 或 ¥3,000/日）</div></div>
+        <div class="row"><div class="time">10:00-12:30</div><div class="desc">🏞️ 騎景觀之路：三愛之丘(3.5km/+1%) → 四季彩之丘(4.5km/0~2%) → 青池(8km/ave1.9%最陡4-5%) → 白鬚瀑布(0.5km/徒步)</div></div>
+        <div class="row"><div class="time">12:30-13:30</div><div class="desc">青池＆白鬚瀑布拍照、午餐（自備或青池旁小賣店）</div></div>
+        <div class="row"><div class="time">13:30-15:00</div><div class="desc">回程 16km 全下坡 → 美瑛駅，超爽快 🎉</div></div>
+        <div class="row"><div class="time">下午</div><div class="desc">還車 → 接駁車或計程車回緩慢北海道</div></div>
+      </div>
+      <div class="steps">
+        <h4>📍 路線與高度</h4>
+        <div class="route-box" style="font-size:12px;font-family:JetBrains Mono,monospace;">美瑛駅 ● (250m) ───── +1% ──→ 三愛之丘(285m) ── 0~2% ──→ 四季彩之丘(300m)
+　 　 　 　 　 　 　 　 　 　 　 　 　 　 　 　 ↓ 關鍵爬坡 8km / ave1.9%（最陡4-5%）
+　 　 　 　 　 　 　 　 　 　 　 　 　 青池 ● (450m)
+　 　 　 　 　 　 　 　 　 　 　 　 　 　 　 ↓ 徒步 5 分
+　 　 　 　 　 　 　 　 　 　 　 　 白鬚瀑布 ●
+　 　 　 　 　 　 　 　 　 　 　 　 　 　 ↑折返點
+　　　　　　　　　　　　　　　　← 回程 16km / -1.3% 一路下坡 → 美瑛駅</div>
+        <a href="https://www.google.com/maps/dir/?api=1&amp;origin=美瑛駅&amp;destination=白ひげの滝&amp;waypoints=三愛の丘,四季彩の丘,青池&amp;travelmode=bicycling" target="_blank" class="map-link">🗺️ Google Maps 查看路線</a>
+        <div class="elev-box" style="margin-top:8px;font-size:11px;font-family:JetBrains Mono,monospace;">高度(m)　　　 　 　 　 　 ★ 青池(450m)
+450 ┤　　　　　　　　　　　／╲
+    │　　　　　　　　　　／　　╲
+400 ┤　　　　　　　　　／　　　 ╲
+    │　　　　　　　 　／　　　　 ╲
+350 ┤　　四季彩之丘 ╱　　　　　 ╲
+    │　　　(300m) ╱　　　　　　　╲
+300 ┤　　　　╱──╲　　　　　　　 ╲
+    │三愛之丘╱　　　╲　　　　　　 ╲
+250 ┤ 美瑛駅 ╱──────────────╲ 美瑛駅
+    └───────────────────────────
+    0km　　5km　　10km　　15km　　20km　25km　30km　35km
+　← 去程緩上 →　← 關鍵 8km 爬坡 ↑150m →　← 回程 16km ↓ →</div>
+        <div class="tip bike"><b>電動車提醒：</b>四季彩→青池 8km 爬坡（平均 1.9%、最陡 4-5%）開電動最強模式慢慢踩，回程 16km 全下坡超爽。</div>
+      </div>
+    </div>
+
+    <!-- DAY 3 -->
+    <div class="stop" id="day3">
+      <div class="node">3</div>
+      <div class="stop-head">
+        <div class="stop-date">7/23（四）</div>
+        <h3>🚲💜 騎去富田農場看薰衣草</h3>
+        <p class="stop-sub">50km 來回，但坡度幾乎為零，沿國道 237 平路直達。</p>
+        <span class="stay-tag">🏡 緩慢北海道（第 3 晚）<span class="mile-tag" style="margin-left:12px;">🚲 ~50km</span></span>
+      </div>
+      <div class="schedule">
+        <div class="row"><div class="time">08:30</div><div class="desc">緩慢出發 → 美瑛駅（09:00 請櫃檯叫計程車或 09:30 接駁車）</div></div>
+        <div class="row"><div class="time">09:00</div><div class="desc">BIEI HILLS 租車 → 沿國道 237 向南騎（24km / 平均 -0.25%，幾乎平的）</div></div>
+        <div class="row"><div class="time">10:30-13:00</div><div class="desc">🌟 富田農場：傳統薰衣草田、彩色花田、花人之舍、蒸餾工房<span class="sub">必吃薰衣草霜淇淋！園區免費</span></div></div>
+        <div class="row"><div class="time">13:00-14:30</div><div class="desc">原路騎回美瑛駅（1.5h）</div></div>
+        <div class="row"><div class="time">傍晚</div><div class="desc">還車 → 接駁車或計程車回緩慢北海道</div></div>
+      </div>
+      <div class="steps">
+        <h4>📍 路線與高度</h4>
+        <div class="route-box" style="font-size:12px;font-family:JetBrains Mono,monospace;">美瑛駅 ● (250m)
+　 │ ↓ 國道237 / 平均 -0.25%
+　 │
+美馬牛 (225m)　← 約 11km（-0.25%）
+　 │
+中富良野 (205m) ← 約 19km（-0.25%）
+　 │
+富田農場 ● (210m) ← 24km／折返點（+0.1%）
+　 │
+ラベンダー畑駅（臨時站）</div>
+        <a href="https://www.google.com/maps/dir/?api=1&amp;origin=美瑛駅&amp;destination=ファーム富田&amp;travelmode=bicycling" target="_blank" class="map-link">🗺️ Google Maps 查看路線</a>
+        <div class="elev-box" style="margin-top:8px;font-size:11px;font-family:JetBrains Mono,monospace;">【去程】　　　　　　　　　【回程】
+260 ┤美瑛駅
+    │  ╲
+240 ┤　 ╲
+    │　　╲
+220 ┤　　 ╲___________________ 富田農場
+    │　　　　　　　　　　　　╱
+200 ┤　　　　　　　　　 　 ╱
+    └───────────────────────
+    0km　　　8km　　　16km　　　24km
+去程：不知不覺溜下去 ｜ 回程：也是平的（平均 ~0.2%）</div>
+        <div class="tip warn"><b>體力備案：</b>回程騎不動可從富良野駅搭 JR 普通列車回美瑛駅（30 分，¥320），腳踏車先問 BIEI HILLS 能否處理。</div>
+        <div class="tip bike"><b>沿路補給：</b>國道 237 上有便利店（Seicomart），可中途補水休息。</div>
+      </div>
+    </div>
+
+    <!-- DAY 4 -->
+    <div class="stop" id="day4">
+      <div class="node">4</div>
+      <div class="stop-head">
+        <div class="stop-date">7/24（五）</div>
+        <h3>🚲 拼布之路 → JR 往札幌</h3>
+        <p class="stop-sub">移動日。早上輕鬆騎拼布之路，中午搭 JR 南下札幌。18km 很輕鬆。</p>
+        <span class="stay-tag">🏙️ Vessel Inn 札幌中島公園（第 4 晚）<span class="mile-tag" style="margin-left:12px;">🚲 ~18km</span></span>
+      </div>
+      <div class="schedule">
+        <div class="row"><div class="time">06:30</div><div class="desc">緩慢出發（計程車，前一晚請櫃檯叫車）→ 美瑛駅<span class="sub">行李放 coin locker（¥300-500）</span></div></div>
+        <div class="row"><div class="time">07:00</div><div class="desc">BIEI HILLS 租電動腳踏車</div></div>
+        <div class="row"><div class="time">07:30-10:00</div><div class="desc">騎拼布之路環狀：Ken & Mary(3km/+0.8%) → Seven Star(1.5km/+0.3%) → 親子之木(2km/+1.5%) → 北西之丘(2km/-1%)<span class="sub">沿途都是經典丘陵田園風景</span></div></div>
+        <div class="row"><div class="time">10:00-10:30</div><div class="desc">還車 + 美瑛駅附近補給</div></div>
+        <div class="row"><div class="time">11:00-12:30</div><div class="desc">JR 美瑛→旭川（30 分）→ 特急 Kamui → 札幌（90 分）</div></div>
+        <div class="row"><div class="time">12:30-</div><div class="desc">地鐵南北線 → 中島公園駅（3 分）→ Vessel Inn Check-in</div></div>
+        <div class="row"><div class="time">晚上</div><div class="desc">薄野／狸小路：成吉思汗烤羊肉、味噌拉麵、湯咖哩<span class="sub">從飯店徒步 10 分即達薄野</span></div></div>
+      </div>
+      <div class="steps">
+        <h4>📍 路線與高度</h4>
+        <div class="route-box" style="font-size:12px;font-family:JetBrains Mono,monospace;">　　　　　　　　　　　 　 　 北西之丘(290m)
+　　　　　　　　　　← -1% ──── 親子之木(310m)
+　　　　　　　　 　 　 　 　 　 　 ↑ +1.5%
+　　　　　Seven Star(280m) ← +0.3% ─ Ken & Mary(275m)
+　　　　　　　　 　 　 　 　 　 　 ↑ +0.8%
+　　　　　　　　　 　 美瑛駅(250m) ● スタート＆ゴール</div>
+        <a href="https://www.google.com/maps/dir/?api=1&amp;origin=美瑛駅&amp;destination=美瑛駅&amp;waypoints=ケンとメリーの木,セブンスターの木,親子の木,北西の丘展望公園&amp;travelmode=bicycling" target="_blank" class="map-link">🗺️ Google Maps 查看路線</a>
+        <div class="elev-box" style="margin-top:8px;font-size:11px;font-family:JetBrains Mono,monospace;">高度(m)
+310 ┤　　　　╱╲ 親子之木
+    │　　　 ╱　╲
+290 ┤　 　 ╱　　 ╲ 北西之丘
+    │　　╱　　　 ╲
+270 ┤ Ken╱　　　 　╲
+    │ & ╱　　　　 　 ╲
+250 ┤╱ 美瑛駅　　　　　╲ 美瑛駅
+    └───────────────────
+    0km　　 5km　　 10km　　 15km　 18km
+↑累積爬升 ~120m｜最陡 1.5%（感覺像微微上坡）</div>
+        <div class="tip bike"><b>注意：</b>一定要租電動車，拼布之路雖不陡但丘陵綿延。移動日輕鬆騎，中午記得趕上 11:00 的 JR。</div>
+        <div class="tip">花田都是私人農地，只在道路上取景，不要踏入田裡。</div>
+      </div>
+    </div>
+
+    <!-- DAY 5 -->
+    <div class="stop" id="day5">
+      <div class="node">5</div>
+      <div class="stop-head">
+        <div class="stop-date">7/25（六）</div>
+        <h3>☀️ 札幌市區 → 新千歲機場 → 回台</h3>
+        <p class="stop-sub">上午市區散步，下午前往機場。不排緊湊行程，悠閒收尾。</p>
+      </div>
+      <div class="schedule">
+        <div class="row"><div class="time">上午</div><div class="desc">大通公園 → 札幌電視塔（¥1,000）→ 時計台（¥200）→ 北海道廳舊本廳舍（免費）<span class="sub">全部徒步可達，約 2-3 小時</span></div></div>
+        <div class="row"><div class="time">午後</div><div class="desc">地鐵南北線 → 札幌駅（¥210）→ JR 快速 Airport（¥1,150，37 分）→ 新千歲機場</div></div>
+        <div class="row"><div class="time">機場</div><div class="desc">報到 + 安檢 → 免稅店（Royce'、白色戀人、六花亭、哆啦 A 夢天空樂園）<span class="sub">建議起飛前 2 小時到機場</span></div></div>
+      </div>
+      <div class="steps">
+        <h4>兩種機場交通方案</h4>
+        <ol>
+          <li><b>地鐵＋JR（推薦）：</b>中島公園駅 → 札幌駅（3 分）→ 快速 Airport → 機場（37 分）。</li>
+          <li><b>機場巴士：</b>飯店旁有站牌直達機場，約 60-80 分，省去拖行李轉乘。</li>
+        </ol>
+        <div class="tip warn">早班機請預留寬裕時間，建議起飛前 3 小時出發。</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ APPENDIX ============ -->
+<section id="appendix">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Appendix</span>
+      <h2>實用附錄</h2>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3>💰 預算估算</h3>
+        <table class="ov-table" style="font-size:13px;">
+          <thead><tr><th>項目</th><th>金額</th></tr></thead>
+          <tbody>
+            <tr><td>JR Pass 4 日</td><td>¥11,000（已買）</td></tr>
+            <tr><td>住宿 4 晚</td><td>已訂房</td></tr>
+            <tr><td>腳踏車 3 天</td><td>~¥9,000</td></tr>
+            <tr><td>餐食 5 天</td><td>~¥15,000-20,000</td></tr>
+            <tr><td>交通零錢</td><td>~¥3,000</td></tr>
+            <tr><td>7/25 機場單程</td><td>¥1,150</td></tr>
+            <tr><td><b>合計</b></td><td><b>~¥39,150-44,150</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3>🌤️ 天氣與衣著</h3>
+        <table class="ov-table" style="font-size:13px;">
+          <thead><tr><th>項目</th><th>資訊</th></tr></thead>
+          <tbody>
+            <tr><td>氣溫</td><td>18°C ~ 26°C</td></tr>
+            <tr><td>降雨</td><td>偶有午後陣雨</td></tr>
+            <tr><td>穿著</td><td>短袖 + 薄外套</td></tr>
+            <tr><td>騎車必帶</td><td>防曬、帽子、太陽眼鏡、大水壺</td></tr>
+          </tbody>
+        </table>
+        <div class="note" style="margin-top:10px;">7 月下旬薰衣草滿開，但紫外線極強，騎車三小時以上務必定時補防曬。</div>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-top:16px;">
+      <div class="card">
+        <h3>🍽️ 美食推薦</h3>
+        <table class="ov-table" style="font-size:13px;">
+          <thead><tr><th>地區</th><th>美食</th><th>推薦</th></tr></thead>
+          <tbody>
+            <tr><td>美瑛</td><td>咖哩烏龍麵</td><td>カレーうどん びえい</td></tr>
+            <tr><td>美瑛</td><td>薰衣草霜淇淋</td><td>四季彩之丘</td></tr>
+            <tr><td>富良野</td><td>蛋包飯</td><td>唯我獨尊</td></tr>
+            <tr><td>札幌</td><td>味噌拉麵</td><td>すみれ</td></tr>
+            <tr><td>札幌</td><td>湯咖哩</td><td>GARAKU</td></tr>
+            <tr><td>札幌</td><td>成吉思汗</td><td>だるま</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3>🚐 緩慢接駁車</h3>
+        <table class="ov-table" style="font-size:13px;">
+          <thead><tr><th>方向</th><th>時刻</th></tr></thead>
+          <tbody>
+            <tr><td>美瑛駅→緩慢</td><td>15:20 / 16:20 / 17:20（需預約）</td></tr>
+            <tr><td>緩慢→美瑛駅</td><td>09:30 / 10:00（免預約）</td></tr>
+            <tr><td>計程車備用</td><td>隨時可叫，¥1,000-1,500</td></tr>
+          </tbody>
+        </table>
+        <div class="note" style="margin-top:10px;">接駁車預約：+81-166-92-5513 或訂房平台備註。</div>
+      </div>
+    </div>
+
+    <!-- Emergency -->
+    <div class="card" style="margin-top:16px;">
+      <h3>🆘 緊急電話</h3>
+      <div class="em-grid">
+        <div class="em-item"><strong>🚔 警察</strong><span class="num">110</span></div>
+        <div class="em-item"><strong>🚑 救護車 / 消防</strong><span class="num">119</span></div>
+        <div class="em-item"><strong>🇹🇼 駐札幌代表處</strong><span class="num">+81-11-222-2030</span></div>
+        <div class="em-item"><strong>📞 外交部 24hr</strong><span class="num">+886-800-085-095</span></div>
+      </div>
+    </div>
+
+    <div class="card" style="border-left:4px solid var(--accent);">
+      <h3 style="color:var(--accent);">🚫 本次未納入</h3>
+      <p><b>函館</b>：單程車程超過 4.5 小時，標註為「建議下次再訪」，本次不予列入。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PHRASES ============ -->
+<section class="alt" id="phrases">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Pocket Japanese</span>
+      <h2>簡單日語小抄</h2>
+      <p class="lede">依情境分組，漢字上方附平假名讀音（ふりがな）與羅馬拼音。臨場照著念，店員大多聽得懂。</p>
+    </div>
+
+    <div class="phrase-group">
+      <h4>／ 飯店 Check-in ／</h4>
+      <div class="phrase-grid">
+        <div class="phrase-card">
+          <div class="phrase-jp">チェックインをお<ruby>願<rt>ねが</rt></ruby>いします。</div>
+          <div class="phrase-romaji">Chekkuin wo onegai shimasu.</div>
+          <div class="phrase-zh">我要辦理入住。</div>
+        </div>
+        <div class="phrase-card">
+          <div class="phrase-jp"><ruby>予約<rt>よやく</rt></ruby>しています。<ruby>名前<rt>なまえ</rt></ruby>は◯◯です。</div>
+          <div class="phrase-romaji">Yoyaku shiteimasu. Namae wa ◯◯ desu.</div>
+          <div class="phrase-zh">我有預約，名字是◯◯。</div>
+        </div>
+        <div class="phrase-card">
+          <div class="phrase-jp"><ruby>荷物<rt>にもつ</rt></ruby>を<ruby>預<rt>あず</rt></ruby>かってもらえますか。</div>
+          <div class="phrase-romaji">Nimotsu wo azukatte moraemasu ka.</div>
+          <div class="phrase-zh">可以寄放行李嗎？</div>
+        </div>
+        <div class="phrase-card">
+          <div class="phrase-jp"><ruby>朝食<rt>ちょうしょく</rt></ruby>は<ruby>何時<rt>なんじ</rt></ruby>ですか。</div>
+          <div class="phrase-romaji">Choushoku wa nanji desu ka.</div>
+          <div class="phrase-zh">早餐幾點開始？</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phrase-group">
+      <h4>／ 租腳踏車 ／</h4>
+      <div class="phrase-grid">
+        <div class="phrase-card">
+          <div class="phrase-jp"><ruby>電動<rt>でんどう</rt></ruby><ruby>自転車<rt>じてんしゃ</rt></ruby>を<ruby>借<rt>か</rt></ruby>りたいです。</div>
+          <div class="phrase-romaji">Dendou jitensha wo karitai desu.</div>
+          <div class="phrase-zh">我想租電動腳踏車。</div>
+        </div>
+        <div class="phrase-card">
+          <div class="phrase-jp"><ruby>一日<rt>いちにち</rt></ruby><ruby>借<rt>か</rt></ruby>りたいです。<ruby>料金<rt>りょうきん</rt></ruby>はいくらですか。</div>
+          <div class="phrase-romaji">Ichinichi karitai desu. Ryoukin wa ikura desu ka.</div>
+          <div class="phrase-zh">我想租一天。費用多少？</div>
+        </div>
+        <div class="phrase-card">
+          <div class="phrase-jp"><ruby>何時<rt>なんじ</rt></ruby>までですか。</div>
+          <div class="phrase-romaji">Nanji made desu ka.</div>
+          <div class="phrase-zh">營業到幾點？</div>
+        </div>
+        <div class="phrase-card">
+          <div class="phrase-jp"><ruby>富良野<rt>ふらの</rt></ruby>で<ruby>返却<rt>へんきゃく</rt></ruby>できますか。</div>
+          <div class="phrase-romaji">Furano de henkyaku dekimasu ka.</div>
+          <div class="phrase-zh">可以在富良野還車嗎？</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phrase-group">
+      <h4>／ 車站與交通 ／</h4>
+      <div class="phrase-grid">
+        <div class="phrase-card">
+          <div class="phrase-jp">すみません。<ruby>美瑛<rt>びえい</rt></ruby>は<ruby>何番線<rt>なんばんせん</rt></ruby>ですか。</div>
+          <div class="phrase-romaji">Sumimasen. Biei wa nanbansen desu ka.</div>
+          <div class="phrase-zh">請問往美瑛是第幾月台？</div>
+        </div>
+        <div class="phrase-card">
+          <div class="phrase-jp"><ruby>指定席<rt>していせき</rt></ruby>をお<ruby>願<rt>ねが</rt></ruby>いします。</div>
+          <div class="phrase-romaji">Shiteiseki wo onegai shimasu.</div>
+          <div class="phrase-zh">我要劃指定席。</div>
+        </div>
+        <div class="phrase-card">
+          <div class="phrase-jp"><ruby>何時<rt>なんじ</rt></ruby>に<ruby>出発<rt>しゅっぱつ</rt></ruby>しますか。</div>
+          <div class="phrase-romaji">Nanji ni shuppatsu shimasu ka.</div>
+          <div class="phrase-zh">幾點出發？</div>
+        </div>
+        <div class="phrase-card">
+          <div class="phrase-jp">ここ。<ruby>座<rt>すわ</rt></ruby>ってもいいですか。</div>
+          <div class="phrase-romaji">Koko. Suwatte mo ii desu ka.</div>
+          <div class="phrase-zh">這裡可以坐嗎？</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phrase-group">
+      <h4>／ 餐廳與購物 ／</h4>
+      <div class="phrase-grid">
+        <div class="phrase-card">
+          <div class="phrase-jp">これをください。</div>
+          <div class="phrase-romaji">Kore wo kudasai.</div>
+          <div class="phrase-zh">我要這個（點餐/購物皆可用）。</div>
+        </div>
+        <div class="phrase-card">
+          <div class="phrase-jp"><ruby>中国語<rt>ちゅうごくご</rt></ruby>メニューはありますか。</div>
+          <div class="phrase-romaji">Chuugokugo menyuu wa arimasu ka.</div>
+          <div class="phrase-zh">有中文菜單嗎？</div>
+        </div>
+        <div class="phrase-card">
+          <div class="phrase-jp"><ruby>写真<rt>しゃしん</rt></ruby>を<ruby>撮<rt>と</rt></ruby>ってもいいですか。</div>
+          <div class="phrase-romaji">Shashin wo totte mo ii desu ka.</div>
+          <div class="phrase-zh">可以拍照嗎？</div>
+        </div>
+        <div class="phrase-card">
+          <div class="phrase-jp"><ruby>別々<rt>べつべつ</rt></ruby>でお<ruby>願<rt>ねが</rt></ruby>いします。</div>
+          <div class="phrase-romaji">Betsubetsu de onegai shimasu.</div>
+          <div class="phrase-zh">請分開結帳。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phrase-group">
+      <h4>／ 緊急用語 ／</h4>
+      <div class="phrase-grid">
+        <div class="phrase-card" style="border-left:3px solid var(--accent);">
+          <div class="phrase-jp">たすけて！</div>
+          <div class="phrase-romaji">Tasukete!</div>
+          <div class="phrase-zh">救命！</div>
+        </div>
+        <div class="phrase-card" style="border-left:3px solid var(--accent);">
+          <div class="phrase-jp"><ruby>道<rt>みち</rt></ruby>に<ruby>迷<rt>まよ</rt></ruby>いました。<ruby>警察<rt>けいさつ</rt></ruby>を<ruby>呼<rt>よ</rt></ruby>んでください。</div>
+          <div class="phrase-romaji">Michi ni mayoimashita. Keisatsu wo yonde kudasai.</div>
+          <div class="phrase-zh">我迷路了。請叫警察。</div>
+        </div>
+        <div class="phrase-card" style="border-left:3px solid var(--accent);">
+          <div class="phrase-jp"><ruby>日本語<rt>にほんご</rt></ruby>がわかりません。<ruby>中国語<rt>ちゅうごくご</rt></ruby>はできますか。</div>
+          <div class="phrase-romaji">Nihongo ga wakarimasen. Chuugokugo wa dekimasu ka.</div>
+          <div class="phrase-zh">我不懂日文。你會中文嗎？</div>
+        </div>
+        <div class="phrase-card" style="border-left:3px solid var(--accent);">
+          <div class="phrase-jp">もう<ruby>一度<rt>いちど</rt></ruby>お<ruby>願<rt>ねが</rt></ruby>いします。</div>
+          <div class="phrase-romaji">Mou ichido onegai shimasu.</div>
+          <div class="phrase-zh">請再說一次。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <h5>資料來源</h5>
+    <p>JR北海道（jrhokkaido.co.jp）、美瑛町觀光協會（biei-hokkaido.jp）、富田農場（farm-tomita.co.jp）、緩慢北海道、Vessel Inn、Visit Japan Web 官方說明。坡度 % 為 Google Maps 地形圖與公式（爬升÷距離×100）估算值，實際騎乘因路線微調可能略有差異。季節列車班次每年調整，出發前請以官網最新時刻為準。</p>
+    <a class="backtop" href="#overview">↑ 回到總覽</a>
+  </div>
+</footer>
+
+</body>
+</html>
