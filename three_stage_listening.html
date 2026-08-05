@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三段式空間聆聽</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EAEAE0;
+    --paper-light:#F5F5EF;
+    --paper-deep:#DEDED1;
+    --ink:#2A2E26;
+    --ink-soft:#5C6355;
+    --ink-faint:#8B9182;
+    --moss:#57684A;
+    --moss-dark:#3F4C36;
+    --moss-pale:#DDE3D4;
+    --gold:#A98953;
+    --line:rgba(42,46,38,0.14);
+    --line-strong:rgba(42,46,38,0.28);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;background:var(--paper);color:var(--ink);font-family:'Noto Sans TC',sans-serif;-webkit-font-smoothing:antialiased;}
+  body{
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(255,255,255,0.5), transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(255,255,255,0.35), transparent 45%);
+    min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px 18px;
+  }
+  .frame{
+    width:100%;max-width:680px;min-height:560px;background:var(--paper-light);
+    border:1px solid var(--line);border-radius:2px;
+    box-shadow:0 1px 2px rgba(42,46,38,0.04), 0 20px 60px -30px rgba(42,46,38,0.35);
+    display:flex;flex-direction:column;position:relative;overflow:hidden;
+  }
+  .rail{display:flex;align-items:center;gap:0;padding:26px 32px 0 32px;}
+  .rail-track{flex:1;display:flex;align-items:center;}
+  .dot-wrap{display:flex;align-items:center;flex:1;position:relative;}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--paper-deep);border:1px solid var(--line-strong);flex-shrink:0;transition:all .4s ease;position:relative;z-index:2;}
+  .dot.done{background:var(--moss); border-color:var(--moss);}
+  .dot.current{background:var(--gold); border-color:var(--gold); transform:scale(1.35);}
+  .seg{flex:1;height:1px;background:var(--line);position:relative;z-index:1;}
+  .seg.done{background:var(--moss);}
+  .rail-label{font-family:'Noto Serif TC',serif;font-size:11px;letter-spacing:0.12em;color:var(--ink-faint);padding:0 32px;margin-top:8px;}
+
+  .stage{flex:1;padding:36px 40px 20px 40px;display:none;flex-direction:column;animation:fadein .5s ease;}
+  .stage.active{display:flex;}
+  @keyframes fadein{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+  .eyebrow{font-size:12px;letter-spacing:0.22em;color:var(--gold);font-weight:500;margin-bottom:10px;}
+  h1{font-family:'Noto Serif TC',serif;font-weight:700;font-size:clamp(26px,5vw,36px);line-height:1.35;margin:0 0 18px 0;color:var(--ink);}
+  .lead{font-size:15.5px;line-height:1.9;color:var(--ink-soft);margin:0 0 20px 0;}
+  .lead b{color:var(--ink); font-weight:600;}
+
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:2px;padding:18px 20px;margin-bottom:16px;}
+  .card-title{font-size:12.5px;font-weight:600;color:var(--moss-dark);letter-spacing:0.05em;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+  .card-title::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--gold);}
+  .card p{font-size:14.5px;line-height:1.85;color:var(--ink-soft);margin:0;}
+  ul.rules{margin:0;padding-left:0;list-style:none;}
+  ul.rules li{font-size:14.5px;line-height:1.85;color:var(--ink-soft);padding-left:18px;position:relative;margin-bottom:6px;}
+  ul.rules li::before{content:'—';position:absolute;left:0;color:var(--gold);}
+  ul.rules li b{color:var(--ink); font-weight:600;}
+
+  /* big stage display for the 3 listening phases */
+  .phase-display{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:10px 0 20px 0;
+  }
+  .phase-ring{
+    width:150px;height:150px;
+    border-radius:50%;
+    border:1px solid var(--accent, var(--moss));
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:26px;
+    position:relative;
+  }
+  .phase-ring::before{
+    content:'';
+    position:absolute;
+    inset:14px;
+    border-radius:50%;
+    background:var(--accent, var(--moss));
+    opacity:0.14;
+  }
+  .phase-time{
+    font-family:'Noto Serif TC',serif;
+    font-size:22px;
+    color:var(--accent, var(--moss));
+    position:relative;
+    z-index:1;
+  }
+  .phase-name{
+    font-size:12.5px;
+    letter-spacing:0.15em;
+    color:var(--ink-faint);
+    margin-bottom:6px;
+  }
+  .phase-title{
+    font-family:'Noto Serif TC',serif;
+    font-size:20px;
+    font-weight:600;
+    color:var(--ink);
+    margin-bottom:22px;
+  }
+  .phase-line{
+    font-family:'Noto Serif TC',serif;
+    font-size:19px;
+    line-height:2;
+    color:var(--ink);
+    max-width:480px;
+    margin:0 0 16px 0;
+  }
+  .phase-note{
+    font-size:13px;
+    color:var(--ink-faint);
+    line-height:1.8;
+    max-width:440px;
+  }
+
+  textarea{
+    width:100%;min-height:100px;resize:vertical;background:var(--paper);
+    border:1px solid var(--line-strong);border-radius:2px;padding:14px;
+    font-family:'Noto Sans TC',sans-serif;font-size:14.5px;line-height:1.8;color:var(--ink);
+  }
+  textarea:focus{outline:none; border-color:var(--moss);}
+  textarea::placeholder{color:var(--ink-faint);}
+  label.field-label{display:block;font-size:12.5px;font-weight:600;color:var(--moss-dark);margin-bottom:8px;letter-spacing:0.03em;}
+
+  .navbar{display:flex;align-items:center;justify-content:space-between;padding:16px 40px 26px 40px;border-top:1px solid var(--line);margin-top:auto;}
+  .nav-btn{font-family:'Noto Sans TC',sans-serif;font-size:13.5px;background:none;border:none;cursor:pointer;color:var(--ink-soft);padding:8px 4px;display:flex;align-items:center;gap:6px;transition:color .2s ease;}
+  .nav-btn:hover{color:var(--ink);}
+  .nav-btn.primary{background:var(--moss);color:#fff;padding:9px 22px;border-radius:20px;}
+  .nav-btn.primary:hover{background:var(--moss-dark); color:#fff;}
+  .nav-btn:disabled{opacity:0.35; cursor:default;}
+  .nav-btn:disabled:hover{color:var(--ink-soft);}
+  .step-tag{font-size:11px;color:var(--ink-faint);letter-spacing:0.1em;align-self:center;}
+
+  @media (max-width:520px){
+    .stage{padding:28px 22px 16px 22px;}
+    .navbar{padding:14px 22px 22px 22px;}
+    .rail{padding:22px 22px 0 22px;}
+    .rail-label{padding:0 22px;}
+    h1{font-size:24px;}
+    .phase-line{font-size:17px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="frame">
+  <div class="rail" id="rail"></div>
+  <div class="rail-label" id="railLabel"></div>
+
+  <!-- STEP 1: 開場與安全感 -->
+  <section class="stage active" data-step="1">
+    <div class="eyebrow">開始・三段式空間聆聽</div>
+    <h1>刻意建立心靈的邊界</h1>
+    <p class="lead">
+      這是一個進階聆聽操練，適合已有禱告基礎的小組。我們會把10分鐘的安靜分成三個階段，
+      刻意在時間與心靈上建立<b>邊界（Margin）</b>，讓自己真正卸下、等候、再聆聽。
+    </p>
+    <div class="card">
+      <div class="card-title">帶領前，先對小組說</div>
+      <ul class="rules">
+        <li><b>不強調對錯</b>：這不是考驗誰聽得比較準，重點是與神建立親密感</li>
+        <li><b>允許空白與失敗</b>：就算這幾分鐘什麼都沒聽到，只是單純休息，也是極具價值的安息</li>
+        <li>準備好手機，<b>設定3分鐘、7分鐘兩個震動提醒</b>（不出聲），放在手邊備用</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- STEP 2: 卸下與放手 -->
+  <section class="stage" data-step="2">
+    <div class="eyebrow">第一階段</div>
+    <h1>卸下與放手</h1>
+    <div class="phase-display" style="--accent:#8C9B7C;">
+      <div class="phase-ring"><div class="phase-time">0–3</div></div>
+      <div class="phase-name">放下清單與焦慮</div>
+      <p class="phase-line">「想像你把這週還沒做完的事、心裡掛心的清單，一件一件放在門外。你不需要記得它們，它們會在那裡等你，不會不見。接下來這幾分鐘，你不需要生產任何價值，只需要在這裡。」</p>
+      <p class="phase-note">若腦中一直冒出待辦事項，再一次放下就好，這是很正常的。</p>
+    </div>
+  </section>
+
+  <!-- STEP 3: 純粹等候 -->
+  <section class="stage" data-step="3">
+    <div class="eyebrow">第二階段</div>
+    <h1>純粹等候</h1>
+    <div class="phase-display" style="--accent:#6C7D5B;">
+      <div class="phase-ring"><div class="phase-time">3–7</div></div>
+      <div class="phase-name">享受神的臨在</div>
+      <p class="phase-line">「不用求任何啟示、不用等神說話。單單記得一件事：神就在這裡，而且祂看著你，是喜悅的。你可以在心裡重複這句話，或什麼都不說，單純享受祂的同在。」</p>
+      <p class="phase-note">這階段本來就不求聽到什麼，單純休息就是它的目的。</p>
+    </div>
+  </section>
+
+  <!-- STEP 4: 聆聽與啟示 -->
+  <section class="stage" data-step="4">
+    <div class="eyebrow">第三階段</div>
+    <h1>聆聽與啟示</h1>
+    <div class="phase-display" style="--accent:#57684A;">
+      <div class="phase-ring"><div class="phase-time">7–10</div></div>
+      <div class="phase-name">領受話語或感動</div>
+      <p class="phase-line">「主啊，當我的心安靜下來時，祢這週想對我說的最溫柔的一句話是什麼？」</p>
+      <p class="phase-note">不用急，浮現什麼都可以——一句話、一個畫面、一種感覺，都算。</p>
+    </div>
+  </section>
+
+  <!-- STEP 5: 團體回饋 -->
+  <section class="stage" data-step="5">
+    <div class="eyebrow">團體回饋</div>
+    <h1>寫下，再說出來</h1>
+    <p class="lead">先給1-2分鐘把那句「溫柔的話」寫下來，再輪流唸出來——先寫再說，比直接開口更容易讓每個人都能參與。</p>
+    <label class="field-label">神這週想對我說的溫柔話語</label>
+    <textarea id="noteArea" placeholder="用一句話寫下你的領受，若這次是安息也可以直接寫「我這次選擇安息」"></textarea>
+    <div class="card" style="margin-top:16px;">
+      <div class="card-title">輪流分享時</div>
+      <p>聽完就換下一位，不評論、不追問、不解讀對方講的話。若這次什麼都沒領受到，也可以只說「我這次選擇安息」，一樣完整。</p>
+    </div>
+  </section>
+
+  <div class="navbar">
+    <button class="nav-btn" id="prevBtn">← 上一步</button>
+    <span class="step-tag" id="stepTag">1 / 5</span>
+    <button class="nav-btn primary" id="nextBtn">下一步 →</button>
+  </div>
+</div>
+
+<script>
+  const totalSteps = 5;
+  let current = 1;
+  const stages = document.querySelectorAll('.stage');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const stepTag = document.getElementById('stepTag');
+  const rail = document.getElementById('rail');
+  const railLabel = document.getElementById('railLabel');
+  const labels = ['開始','卸下與放手','純粹等候','聆聽與啟示','團體回饋'];
+
+  function buildRail(){
+    rail.innerHTML = '';
+    for(let i=1;i<=totalSteps;i++){
+      const dw = document.createElement('div');
+      dw.className = 'dot-wrap';
+      const dot = document.createElement('div');
+      dot.className = 'dot';
+      dot.id = 'dot'+i;
+      dw.appendChild(dot);
+      if(i < totalSteps){
+        const seg = document.createElement('div');
+        seg.className = 'seg';
+        seg.id = 'seg'+i;
+        dw.appendChild(seg);
+      }
+      rail.appendChild(dw);
+    }
+  }
+  buildRail();
+
+  function render(){
+    stages.forEach(s => s.classList.toggle('active', parseInt(s.dataset.step) === current));
+    stepTag.textContent = current + ' / ' + totalSteps;
+    railLabel.textContent = labels[current-1];
+    for(let i=1;i<=totalSteps;i++){
+      const dot = document.getElementById('dot'+i);
+      dot.classList.remove('done','current');
+      if(i < current) dot.classList.add('done');
+      else if(i === current) dot.classList.add('current');
+      const seg = document.getElementById('seg'+i);
+      if(seg) seg.classList.toggle('done', i < current);
+    }
+    prevBtn.disabled = current === 1;
+    nextBtn.textContent = current === totalSteps ? '完成' : '下一步 →';
+  }
+  render();
+
+  prevBtn.addEventListener('click', ()=>{ if(current > 1){ current--; render(); } });
+  nextBtn.addEventListener('click', ()=>{
+    if(current < totalSteps){ current++; render(); }
+    else { nextBtn.textContent = '已完成 ✓'; nextBtn.disabled = true; }
+  });
+</script>
+
+</body>
+</html>
