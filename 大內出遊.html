@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大內單車行程</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sky-top: #2b3a55;
+    --sky-mid: #6d5a72;
+    --sky-bottom: #e8935f;
+    --grass: #f7f3ea;
+    --river: #6e8ca0;
+    --ink: #232a35;
+    --ink-soft: #5a6270;
+    --gold: #cf9b41;
+    --paper: #faf6ef;
+    --line: #e4ddcd;
+    --rust: #b5581f;
+  }
+
+  * { box-sizing: border-box; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: "Noto Serif TC", serif;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 52%, var(--sky-bottom) 100%);
+    padding: 76px 24px 56px;
+    color: var(--grass);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 34px;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 32%, #fff8e6, var(--gold) 70%);
+    transform: translateX(-50%);
+    box-shadow: 0 0 46px 6px rgba(212, 168, 84, 0.45);
+    opacity: 0;
+    animation: rise 1.6s ease-out 0.2s forwards;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translate(-50%, 18px); }
+    to   { opacity: 1; transform: translate(-50%, 0); }
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 620px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .eyebrow {
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    color: rgba(247, 243, 234, 0.8);
+    margin-bottom: 18px;
+  }
+
+  .hero h1 {
+    font-size: clamp(30px, 6vw, 44px);
+    font-weight: 600;
+    line-height: 1.35;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 18px rgba(0,0,0,0.25);
+  }
+
+  .hero-meta {
+    font-size: 16px;
+    color: rgba(247, 243, 234, 0.92);
+    margin-bottom: 34px;
+  }
+
+  .hero-meta b { color: #fff; font-weight: 700; }
+
+  .stat-row {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 14px;
+    backdrop-filter: blur(2px);
+    overflow: hidden;
+  }
+
+  .stat {
+    flex: 1;
+    padding: 18px 12px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.16);
+  }
+  .stat:last-child { border-right: none; }
+
+  .stat .num {
+    display: block;
+    font-family: "Noto Serif TC", serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .stat .label {
+    display: block;
+    font-size: 12.5px;
+    color: rgba(247, 243, 234, 0.78);
+    margin-top: 4px;
+  }
+
+  /* grass silhouette along hero base */
+  .grass-line {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 46px;
+    fill: var(--paper);
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section {
+    padding: 52px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  section:last-of-type { border-bottom: none; }
+
+  .section-head {
+    margin-bottom: 28px;
+  }
+  .section-head .tag {
+    font-size: 13px;
+    color: var(--rust);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .section-head h2 {
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  /* ---------- ELEVATION PROFILE ---------- */
+  .profile-box {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px 20px 8px;
+    margin-bottom: 26px;
+  }
+  .profile-box svg { width: 100%; height: auto; display: block; }
+  .profile-caption {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    text-align: right;
+    padding-top: 6px;
+  }
+
+  table.route {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14.5px;
+  }
+  table.route th, table.route td {
+    text-align: left;
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  table.route th {
+    font-weight: 700;
+    color: var(--ink-soft);
+    font-size: 13px;
+  }
+  table.route td.seg { font-weight: 700; white-space: nowrap; color: var(--rust); }
+  table.route tr:last-child td { border-bottom: none; }
+
+  .summary-line {
+    margin-top: 18px;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline {
+    position: relative;
+    padding-left: 30px;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--gold), var(--river));
+  }
+  .t-item {
+    position: relative;
+    padding-bottom: 30px;
+  }
+  .t-item:last-child { padding-bottom: 0; }
+  .t-item::before {
+    content: "";
+    position: absolute;
+    left: -30px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 3px solid var(--gold);
+  }
+  .t-time {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--rust);
+  }
+  .t-name {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 3px 0 4px;
+  }
+  .t-blurb {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+  }
+  .t-dist {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 12.5px;
+    color: var(--river);
+    background: rgba(110,140,160,0.1);
+    border-radius: 6px;
+    padding: 2px 8px;
+  }
+
+  /* ---------- NOTICE CARDS ---------- */
+  .notice-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .notice {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--rust);
+    border-radius: 10px;
+    padding: 16px 16px 18px;
+  }
+  .notice h3 {
+    font-size: 15.5px;
+    margin-bottom: 8px;
+  }
+  .notice ul {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 13.8px;
+    color: var(--ink-soft);
+  }
+  .notice li { margin-bottom: 5px; }
+
+  @media (max-width: 640px) {
+    .notice-grid { grid-template-columns: 1fr; }
+    table.route { font-size: 13px; }
+    table.route th:nth-child(4), table.route td:nth-child(4) { display: none; }
+  }
+
+  /* ---------- FOOD GRID ---------- */
+  .food-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .food-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px;
+    transition: box-shadow 0.2s;
+  }
+  .food-card:hover {
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  }
+  .food-card h3 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .food-card .place {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .food-card p {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  /* ---------- MAP ---------- */
+  .map-container {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    margin-top: 12px;
+  }
+  .map-container iframe {
+    width: 100%;
+    height: 320px;
+    border: none;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: linear-gradient(180deg, var(--sky-bottom) 0%, var(--sky-mid) 60%, var(--sky-top) 100%);
+    color: var(--grass);
+    padding: 44px 24px 40px;
+    text-align: center;
+  }
+  footer h3 {
+    font-size: 19px;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  footer p {
+    font-size: 14.5px;
+    color: rgba(247, 243, 234, 0.88);
+    margin: 4px 0;
+  }
+  footer .sign {
+    margin-top: 22px;
+    font-family: "Noto Serif TC", serif;
+    font-size: 15px;
+    color: rgba(255,255,255,0.85);
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">大內單車行程</div>
+    <h1>臺南山上水道博物館 ➔ 大內橋</h1>
+    <div class="hero-meta"><b>08:30</b> 集合 · 台南山上花園水道博物館 · 10人以內</div>
+    <div class="stat-row">
+      <div class="stat"><span class="num">8.5–10</span><span class="label">公里・總距離</span></div>
+      <div class="stat"><span class="num">30–40</span><span class="label">公尺・總爬升</span></div>
+      <div class="stat"><span class="num">&lt; 1%</span><span class="label">平均坡度</span></div>
+    </div>
+  </div>
+  <svg class="grass-line" viewBox="0 0 800 46" preserveAspectRatio="none">
+    <path d="M0,30 C40,10 80,42 120,26 C160,10 200,40 240,24 C280,8 320,38 360,22 C400,6 440,36 480,20 C520,6 560,34 600,20 C640,6 680,32 720,18 C750,8 780,26 800,16 L800,46 L0,46 Z"></path>
+  </svg>
+</div>
+
+<div class="wrap">
+
+  <section>
+    <div class="section-head">
+      <div class="tag">路線地形參考</div>
+      <h2>距離與爬升怎麼分布</h2>
+    </div>
+
+    <div class="profile-box">
+      <svg viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg">
+        <!-- gridlines -->
+        <line x1="40" y1="20" x2="40" y2="130" stroke="#e4ddcd" stroke-width="1"/>
+        <line x1="40" y1="130" x2="660" y2="130" stroke="#e4ddcd" stroke-width="1"/>
+        <!-- elevation area -->
+        <path d="M40,60 L120,110 L165,88 L210,110 L470,110 L515,88 L560,110 L640,60 L640,130 L40,130 Z"
+              fill="rgba(110,140,160,0.14)"/>
+        <path d="M40,60 L120,110 L165,88 L210,110 L470,110 L515,88 L560,110 L640,60"
+              fill="none" stroke="var(--river)" stroke-width="2.5" stroke-linejoin="round"/>
+        <!-- points -->
+        <circle cx="40" cy="60" r="4" fill="#cf9b41"/>
+        <circle cx="120" cy="110" r="4" fill="#cf9b41"/>
+        <circle cx="165" cy="88" r="4" fill="#cf9b41"/>
+        <circle cx="560" cy="110" r="4" fill="#cf9b41"/>
+        <circle cx="640" cy="60" r="4" fill="#cf9b41"/>
+        <!-- labels -->
+        <text x="40" y="145" font-size="11" fill="#5a6270" text-anchor="middle">水道博物館</text>
+        <text x="120" y="145" font-size="11" fill="#5a6270" text-anchor="middle">大內橋</text>
+        <text x="165" y="30" font-size="11" fill="#5a6270" text-anchor="middle">堤防賞花</text>
+        <text x="560" y="145" font-size="11" fill="#5a6270" text-anchor="middle">大內橋(返)</text>
+        <text x="640" y="45" font-size="11" fill="#5a6270" text-anchor="middle">水道博物館</text>
+        <!-- y axis labels -->
+        <text x="30" y="64" font-size="10" fill="#5a6270" text-anchor="end">25m</text>
+        <text x="30" y="92" font-size="10" fill="#5a6270" text-anchor="end">23m</text>
+        <text x="30" y="114" font-size="10" fill="#5a6270" text-anchor="end">20m</text>
+      </svg>
+      <div class="profile-caption">海拔為示意曲線，實際依現場地形微幅變動</div>
+    </div>
+
+    <table class="route">
+      <thead>
+        <tr>
+          <th>路段</th><th>區段內容</th><th>距離</th><th>坡度</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="seg">去程</td>
+          <td>水道博物館 → 大內橋（沿市道178線）</td>
+          <td>約 3.7 km</td>
+          <td>-0.1%</td>
+        </tr>
+        <tr>
+          <td class="seg">賞草巡禮</td>
+          <td>大內橋堤防 → 石子瀨／大內龍貓公車站</td>
+          <td>約 1.5 km</td>
+          <td>±0.3%</td>
+        </tr>
+        <tr>
+          <td class="seg">回程</td>
+          <td>大內橋 → 水道博物館（原路折返）</td>
+          <td>約 3.8 km</td>
+          <td>+0.1%</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="summary-line">全程主要走市道178線，路況平整、視野開闊，僅過橋引道與堤防坡道有輕微升降，適合新手與親子團體。</div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="tag">時程表</div>
+      <h2>單車行程流程</h2>
+    </div>
+
+    <div class="timeline">
+      <div class="t-item">
+        <div class="t-time">08:30</div>
+        <div class="t-name">水道博物館集合</div>
+        <div class="t-blurb">清點人數、裝備檢查，10人建議分兩排單車編隊，安排領騎與押隊各一人。園區內有水道咖啡可先行休息補給。</div>
+      </div>
+      <div class="t-item">
+        <div class="t-time">08:40</div>
+        <div class="t-name">出發往大內橋</div>
+        <div class="t-blurb">沿市道178線騎行，路況平整，視野開闊，偶有農用車通過請靠右騎乘。</div>
+        <div class="t-dist">約 3.7 km</div>
+      </div>
+      <div class="t-item">
+        <div class="t-time">09:05</div>
+        <div class="t-name">大內橋堤防賞花</div>
+        <div class="t-blurb">甜根子草花海正美，可將自行車推上堤防坡道騎行或停放，視野極佳。</div>
+      </div>
+      <div class="t-item">
+        <div class="t-time">09:35</div>
+        <div class="t-name">石子瀨／大內龍貓公車站</div>
+        <div class="t-blurb">順遊彩繪村拍照，延伸賞花。</div>
+        <div class="t-dist">約 1.5 km</div>
+      </div>
+      <div class="t-item">
+        <div class="t-time">10:10</div>
+        <div class="t-name">大內豆菜麵（大內老街）</div>
+        <div class="t-blurb">⚠️ 賣完即止，大內在地古早味傳統麵食，建議先電話確認或預訂10人份。</div>
+      </div>
+      <div class="t-item">
+        <div class="t-time">11:10</div>
+        <div class="t-name">騎回水道博物館</div>
+        <div class="t-blurb">原路折返，微幅上坡幾乎無感。</div>
+        <div class="t-dist">約 3.8 km</div>
+      </div>
+      <div class="t-item">
+        <div class="t-time">11:40</div>
+        <div class="t-name">水道博物館參觀＋水道咖啡小憩</div>
+        <div class="t-blurb">可安排半小時走走拍照，最後在園內咖啡廳休息收尾。</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="tag">注意事項</div>
+      <h2>出發前請看一下</h2>
+    </div>
+
+    <div class="notice-grid">
+      <div class="notice">
+        <h3>團體騎乘安全</h3>
+        <ul>
+          <li>10人分兩排編隊，前設領騎、後設押隊</li>
+          <li>178縣道偶有農用車與大型車，靠右單排通過會車路段</li>
+          <li>建議配戴高能見度背心或臂章</li>
+        </ul>
+      </div>
+      <div class="notice">
+        <h3>防曬與補給</h3>
+        <ul>
+          <li>9月台南早上仍偏熱、紫外線強，堤防路段少遮蔭</li>
+          <li>務必準備防曬乳、袖套、遮陽帽、足量飲水</li>
+          <li>建議至少2人分攜備用水或補給品</li>
+        </ul>
+      </div>
+      <div class="notice">
+        <h3>連假注意</h3>
+        <ul>
+          <li>大內豆菜麵賣完即止，建議先電話確認或預訂，並準備備案</li>
+          <li>大內橋周邊停車格有限，建議直接騎乘往返</li>
+          <li>甜根子草最佳觀賞點在「大內橋兩側堤防頂」</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="tag">用餐推薦</div>
+      <h2>周邊美食地圖</h2>
+    </div>
+
+    <div class="food-grid">
+      <div class="food-card">
+        <h3>🍜 大內豆菜面</h3>
+        <div class="place">📍 大內老街區（距大內橋約 1 公里）· 多於清晨至午間營業，賣完即止</div>
+        <p>大內在地古早味傳統麵食。麵條清涼 Q 彈，淋上蒜蓉醬油，配上一碗味噌湯，非常適合單車騎乘後補充能量與消暑。</p>
+      </div>
+      <div class="food-card">
+        <h3>☕ 水道咖啡</h3>
+        <div class="place">📍 水道博物館園區內</div>
+        <p>位於水道博物館園區內，提供簡餐、輕食、特色冰品與冷飲。騎回起點後可在此舒適用餐與休息，不必再遠尋餐廳。</p>
+      </div>
+      <div class="food-card">
+        <h3>🍧 山上區老街美食</h3>
+        <div class="place">📍 山上區公所 / 老街（距水道博物館約 1.5 公里）</div>
+        <p>折回到山上區一帶，有許多在地麵店與剉冰店，價格實惠，能體驗農村聚落的在地風味。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="tag">路線地圖</div>
+      <h2>騎乘路線一覽</h2>
+    </div>
+
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.8!2d120.2!3d23.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPKsDA2JzAwLjAiTiAxMjDCsDEyJzAwLjAiRQ!5e0!3m2!1szh-TW!2stw!4v1"
+        allowfullscreen loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+    <p style="text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:10px;">可點擊地圖放大檢視完整路線</p>
+  </section>
+
+</div>
+
+<footer>
+  <h3>集合資訊</h3>
+  <p>台南山上花園水道博物館</p>
+  <p>台南市山上區山上里山上16號</p>
+  <p>博物館開放時間 09:30–17:30（16:30停止售票入園）</p>
+  <div class="sign">祝大家騎乘愉快 🚴</div>
+</footer>
+
+</body>
+</html>
