@@ -271,6 +271,49 @@
     padding: 2px 8px;
   }
 
+  .schedule {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14.5px;
+  }
+  .schedule th, .schedule td {
+    text-align: left;
+    padding: 14px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  .schedule th {
+    font-weight: 700;
+    color: var(--ink-soft);
+    font-size: 13px;
+  }
+  .schedule tr:last-child td { border-bottom: none; }
+  .schedule .s-time {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    color: var(--rust);
+    white-space: nowrap;
+    width: 64px;
+  }
+  .schedule .s-name {
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+  .schedule .s-note {
+    color: var(--ink-soft);
+    font-size: 13.5px;
+  }
+  .schedule .s-dist {
+    white-space: nowrap;
+    color: var(--river);
+    font-size: 13.5px;
+  }
+
+  @media (max-width: 640px) {
+    .schedule { font-size: 13.5px; }
+    .schedule th:nth-child(3), .schedule td:nth-child(3) { display: none; }
+  }
+
   /* ---------- NOTICE CARDS ---------- */
   .notice-grid {
     display: grid;
@@ -345,7 +388,7 @@
   }
   .map-container iframe {
     width: 100%;
-    height: 320px;
+    height: 400px;
     border: none;
   }
 
@@ -380,7 +423,7 @@
   <div class="hero-inner">
     <div class="eyebrow">大內單車行程</div>
     <h1>臺南山上水道博物館 ➔ 大內橋</h1>
-    <div class="hero-meta"><b>08:30</b> 集合 · 台南山上花園水道博物館 · 10人以內</div>
+    <div class="hero-meta"><b>08:20</b> 世界之光聖教會集合 → <b>09:00</b> 山上水道博物館出發 · 10人以內</div>
     <div class="stat-row">
       <div class="stat"><span class="num">8.5–10</span><span class="label">公里・總距離</span></div>
       <div class="stat"><span class="num">30–40</span><span class="label">公尺・總爬升</span></div>
@@ -394,71 +437,80 @@
 
 <div class="wrap">
 
-  <section>
-    <div class="section-head">
-      <div class="tag">路線地形參考</div>
-      <h2>距離與爬升怎麼分布</h2>
-    </div>
+  <!-- 修正後的路線地形區塊 -->
+    <section>
+      <div class="section-head">
+        <div class="tag">路線地形參考</div>
+        <h2>距離與爬升估算</h2>
+      </div>
 
-    <div class="profile-box">
-      <svg viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg">
-        <!-- gridlines -->
-        <line x1="40" y1="20" x2="40" y2="130" stroke="#e4ddcd" stroke-width="1"/>
-        <line x1="40" y1="130" x2="660" y2="130" stroke="#e4ddcd" stroke-width="1"/>
-        <!-- elevation area -->
-        <path d="M40,60 L120,110 L165,88 L210,110 L470,110 L515,88 L560,110 L640,60 L640,130 L40,130 Z"
-              fill="rgba(110,140,160,0.14)"/>
-        <path d="M40,60 L120,110 L165,88 L210,110 L470,110 L515,88 L560,110 L640,60"
-              fill="none" stroke="var(--river)" stroke-width="2.5" stroke-linejoin="round"/>
-        <!-- points -->
-        <circle cx="40" cy="60" r="4" fill="#cf9b41"/>
-        <circle cx="120" cy="110" r="4" fill="#cf9b41"/>
-        <circle cx="165" cy="88" r="4" fill="#cf9b41"/>
-        <circle cx="560" cy="110" r="4" fill="#cf9b41"/>
-        <circle cx="640" cy="60" r="4" fill="#cf9b41"/>
-        <!-- labels -->
-        <text x="40" y="145" font-size="11" fill="#5a6270" text-anchor="middle">水道博物館</text>
-        <text x="120" y="145" font-size="11" fill="#5a6270" text-anchor="middle">大內橋</text>
-        <text x="165" y="30" font-size="11" fill="#5a6270" text-anchor="middle">堤防賞花</text>
-        <text x="560" y="145" font-size="11" fill="#5a6270" text-anchor="middle">大內橋(返)</text>
-        <text x="640" y="45" font-size="11" fill="#5a6270" text-anchor="middle">水道博物館</text>
-        <!-- y axis labels -->
-        <text x="30" y="64" font-size="10" fill="#5a6270" text-anchor="end">25m</text>
-        <text x="30" y="92" font-size="10" fill="#5a6270" text-anchor="end">23m</text>
-        <text x="30" y="114" font-size="10" fill="#5a6270" text-anchor="end">20m</text>
-      </svg>
-      <div class="profile-caption">海拔為示意曲線，實際依現場地形微幅變動</div>
-    </div>
+      <div class="profile-box">
+        <svg viewBox="0 0 680 170" xmlns="http://www.w3.org/2000/svg">
+          <!-- 網格線 -->
+          <line x1="40" y1="20" x2="40" y2="130" stroke="#e4ddcd" stroke-width="1"/>
+          <line x1="40" y1="130" x2="660" y2="130" stroke="#e4ddcd" stroke-width="1"/>
+          
+          <!-- 高度填滿區域 (修正座標) -->
+          <path d="M40,35 L282,105 L331,90 L380,105 L428,105 L640,35 L640,130 L40,130 Z"
+                fill="rgba(110,140,160,0.14)"/>
+          
+          <!-- 高度折線 (修正座標) -->
+          <path d="M40,35 L282,105 L331,90 L380,105 L428,105 L640,35"
+                fill="none" stroke="var(--river)" stroke-width="2.5" stroke-linejoin="round"/>
+          
+          <!-- 定位點 -->
+          <circle cx="40" cy="35" r="4" fill="#cf9b41"/>
+          <circle cx="282" cy="105" r="4" fill="#cf9b41"/>
+          <circle cx="331" cy="90" r="4" fill="#cf9b41"/>
+          <circle cx="380" cy="105" r="4" fill="#cf9b41"/>
+          <circle cx="428" cy="105" r="4" fill="#cf9b41"/>
+          <circle cx="640" cy="35" r="4" fill="#cf9b41"/>
+          
+          <!-- X 軸地名標籤 -->
+          <text x="40" y="145" font-size="11" fill="#5a6270" text-anchor="middle">水道博物館</text>
+          <text x="282" y="145" font-size="11" fill="#5a6270" text-anchor="middle">大內橋</text>
+          <text x="331" y="75" font-size="11" fill="#5a6270" text-anchor="middle">堤防頂賞花</text>
+          <text x="380" y="160" font-size="11" fill="#5a6270" text-anchor="middle">石子瀨</text>
+          <text x="428" y="145" font-size="11" fill="#5a6270" text-anchor="middle">大內橋(返)</text>
+          <text x="640" y="20" font-size="11" fill="#5a6270" text-anchor="middle">水道博物館</text>
+          
+          <!-- Y 軸海拔標籤 (修正刻度) -->
+          <text x="30" y="39" font-size="10" fill="#5a6270" text-anchor="end">32m</text>
+          <text x="30" y="94" font-size="10" fill="#5a6270" text-anchor="end">22m</text>
+          <text x="30" y="109" font-size="10" fill="#5a6270" text-anchor="end">17m</text>
+        </svg>
+        <div class="profile-caption">海拔為相對示意曲線，實際依現場氣壓與 GPS 測繪為準</div>
+      </div>
 
-    <table class="route">
-      <thead>
-        <tr>
-          <th>路段</th><th>區段內容</th><th>距離</th><th>坡度</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="seg">去程</td>
-          <td>水道博物館 → 大內橋（沿市道178線）</td>
-          <td>約 3.7 km</td>
-          <td>-0.1%</td>
-        </tr>
-        <tr>
-          <td class="seg">賞草巡禮</td>
-          <td>大內橋堤防 → 石子瀨／大內龍貓公車站</td>
-          <td>約 1.5 km</td>
-          <td>±0.3%</td>
-        </tr>
-        <tr>
-          <td class="seg">回程</td>
-          <td>大內橋 → 水道博物館（原路折返）</td>
-          <td>約 3.8 km</td>
-          <td>+0.1%</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="summary-line">全程主要走市道178線，路況平整、視野開闊，僅過橋引道與堤防坡道有輕微升降，適合新手與親子團體。</div>
-  </section>
+      <table class="route">
+        <thead>
+          <tr>
+            <th>路段</th><th>區段內容</th><th>距離</th><th>坡度 trend</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="seg">去程</td>
+            <td>水道博物館 → 大內橋（市道178線）</td>
+            <td>約 3.7 km</td>
+            <td>微幅緩下坡 (-0.3%)</td>
+          </tr>
+          <tr>
+            <td class="seg">賞草巡禮</td>
+            <td>大內橋堤防 → 石子瀨／龍貓公車站</td>
+            <td>約 1.5 km</td>
+            <td>堤防坡道短升降 (±1.5%)</td>
+          </tr>
+          <tr>
+            <td class="seg">回程</td>
+            <td>大內橋 → 水道博物館（原路折返）</td>
+            <td>約 3.8 km</td>
+            <td>微幅緩上坡 (+0.3%)</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="summary-line">全程海拔落差僅約 15 公尺，體感近乎平路，極適合各年齡層輕鬆騎乘。</div>
+    </section>
 
   <section>
     <div class="section-head">
@@ -466,46 +518,48 @@
       <h2>單車行程流程</h2>
     </div>
 
-    <div class="timeline">
-      <div class="t-item">
-        <div class="t-time">08:30</div>
-        <div class="t-name">水道博物館集合</div>
-        <div class="t-blurb">清點人數、裝備檢查，10人建議分兩排單車編隊，安排領騎與押隊各一人。園區內有水道咖啡可先行休息補給。</div>
-      </div>
-      <div class="t-item">
-        <div class="t-time">08:40</div>
-        <div class="t-name">出發往大內橋</div>
-        <div class="t-blurb">沿市道178線騎行，路況平整，視野開闊，偶有農用車通過請靠右騎乘。</div>
-        <div class="t-dist">約 3.7 km</div>
-      </div>
-      <div class="t-item">
-        <div class="t-time">09:05</div>
-        <div class="t-name">大內橋堤防賞花</div>
-        <div class="t-blurb">甜根子草花海正美，可將自行車推上堤防坡道騎行或停放，視野極佳。</div>
-      </div>
-      <div class="t-item">
-        <div class="t-time">09:35</div>
-        <div class="t-name">石子瀨／大內龍貓公車站</div>
-        <div class="t-blurb">順遊彩繪村拍照，延伸賞花。</div>
-        <div class="t-dist">約 1.5 km</div>
-      </div>
-      <div class="t-item">
-        <div class="t-time">10:10</div>
-        <div class="t-name">大內豆菜麵（大內老街）</div>
-        <div class="t-blurb">⚠️ 賣完即止，大內在地古早味傳統麵食，建議先電話確認或預訂10人份。</div>
-      </div>
-      <div class="t-item">
-        <div class="t-time">11:10</div>
-        <div class="t-name">騎回水道博物館</div>
-        <div class="t-blurb">原路折返，微幅上坡幾乎無感。</div>
-        <div class="t-dist">約 3.8 km</div>
-      </div>
-      <div class="t-item">
-        <div class="t-time">11:40</div>
-        <div class="t-name">水道博物館參觀＋水道咖啡小憩</div>
-        <div class="t-blurb">可安排半小時走走拍照，最後在園內咖啡廳休息收尾。</div>
-      </div>
-    </div>
+    <table class="schedule">
+      <thead>
+        <tr><th>時間</th><th>行程</th><th>距離</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="s-time">08:20</td>
+          <td><div class="s-name">世界之光聖教會集合</div><div class="s-note">清點人數、裝備檢查，10人建議分兩排單車編隊，安排領騎與押隊各一人。集合完畢後一同前往山上水道博物館。</div></td>
+          <td class="s-dist">—</td>
+        </tr>
+        <tr>
+          <td class="s-time">09:00</td>
+          <td><div class="s-name">抵達山上水道博物館，準備出發</div><div class="s-note">正式騎乘路線的起點，園區內有水道咖啡可先行休息補給、上洗手間。</div></td>
+          <td class="s-dist">—</td>
+        </tr>
+        <tr>
+          <td class="s-time">09:10</td>
+          <td><div class="s-name">出發往大內橋</div><div class="s-note">沿市道178線騎行，路況平整、視野開闊，偶有農用車通過請靠右騎乘。</div></td>
+          <td class="s-dist">約 3.7 km</td>
+        </tr>
+        <tr>
+          <td class="s-time">09:35</td>
+          <td><div class="s-name">大內橋堤防賞花</div><div class="s-note">甜根子草花海正美，可將自行車推上堤防坡道騎行或停放，視野極佳。</div></td>
+          <td class="s-dist">—</td>
+        </tr>
+        <tr>
+          <td class="s-time">10:05</td>
+          <td><div class="s-name">石子瀨／大內龍貓公車站</div><div class="s-note">順遊彩繪村拍照，延伸賞花。途中會經過大內豆菜麵，若還沒吃早餐可順道墊個胃（非正式午餐地點）。</div></td>
+          <td class="s-dist">約 1.5 km</td>
+        </tr>
+        <tr>
+          <td class="s-time">10:35</td>
+          <td><div class="s-name">騎回水道博物館</div><div class="s-note">原路折返，微幅上坡幾乎無感。</div></td>
+          <td class="s-dist">約 3.8 km</td>
+        </tr>
+        <tr>
+          <td class="s-time">11:00</td>
+          <td><div class="s-name">午餐時間</div><div class="s-note">可選擇在水道博物館園區內的水道咖啡用餐，或騎往山上市區品嚐在地小吃，兩者皆步行／短騎可達。</div></td>
+          <td class="s-dist">—</td>
+        </tr>
+      </tbody>
+    </table>
   </section>
 
   <section>
@@ -534,7 +588,7 @@
       <div class="notice">
         <h3>連假注意</h3>
         <ul>
-          <li>大內豆菜麵賣完即止，建議先電話確認或預訂，並準備備案</li>
+          <li>大內豆菜麵屬順路點心，非正式午餐，若沒吃到也不影響行程</li>
           <li>大內橋周邊停車格有限，建議直接騎乘往返</li>
           <li>甜根子草最佳觀賞點在「大內橋兩側堤防頂」</li>
         </ul>
@@ -550,45 +604,42 @@
 
     <div class="food-grid">
       <div class="food-card">
-        <h3>🍜 大內豆菜面</h3>
-        <div class="place">📍 大內老街區（距大內橋約 1 公里）· 多於清晨至午間營業，賣完即止</div>
-        <p>大內在地古早味傳統麵食。麵條清涼 Q 彈，淋上蒜蓉醬油，配上一碗味噌湯，非常適合單車騎乘後補充能量與消暑。</p>
-      </div>
-      <div class="food-card">
         <h3>☕ 水道咖啡</h3>
-        <div class="place">📍 水道博物館園區內</div>
-        <p>位於水道博物館園區內，提供簡餐、輕食、特色冰品與冷飲。騎回起點後可在此舒適用餐與休息，不必再遠尋餐廳。</p>
+        <div class="place">📍 水道博物館園區內 · 午餐首選之一</div>
+        <p>位於水道博物館園區內，提供簡餐、輕食、特色冰品與冷飲。騎回起點後可直接在此舒舒適用餐與休息，不必再遠尋餐廳。</p>
       </div>
       <div class="food-card">
         <h3>🍧 山上區老街美食</h3>
-        <div class="place">📍 山上區公所 / 老街（距水道博物館約 1.5 公里）</div>
-        <p>折回到山上區一帶，有許多在地麵店與剉冰店，價格實惠，能體驗農村聚落的在地風味。</p>
+        <div class="place">📍 山上區公所 / 老街（距水道博物館約 1.5 公里）· 午餐首選之一</div>
+        <p>騎回博物館後若想換個口味，可再往山上市區一帶，有許多在地麵店與剉冰店，價格實惠，能體驗農村聚落的在地風味。</p>
+      </div>
+      <div class="food-card">
+        <h3>🍜 大內豆菜面（順路點心，非正式午餐）</h3>
+        <div class="place">📍 大內老街區（距大內橋約 1 公里）· 多於清晨至午間營業，賣完即止</div>
+        <p>大內在地古早味傳統麵食，麵條清涼 Q 彈，淋上蒜蓉醬油。行程途中若剛好經過且還在營業，可順道墊個胃，但正式午餐建議留在水道咖啡或山上市區。</p>
       </div>
     </div>
   </section>
 
   <section>
     <div class="section-head">
-      <div class="tag">路線地圖</div>
-      <h2>騎乘路線一覽</h2>
+      <div class="tag">定位點／路線地圖</div>
+      <h2>地點與路線導覽</h2>
     </div>
 
     <div class="map-container">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.8!2d120.2!3d23.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPKsDA2JzAwLjAiTiAxMjDCsDEyJzAwLjAiRQ!5e0!3m2!1szh-TW!2stw!4v1"
-        allowfullscreen loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
+      <!-- 若已有在 Google My Maps 自訂包含集合點與路線的地圖，替換 src 連結即可 -->
+      <iframe src="https://www.google.com/maps/d/u/0/embed?mid=11vgC70Eh3oN7UMkjpTXgsPvbrJFN2u8&ehbc=2E312F" width="640" height="480"></iframe>
     </div>
-    <p style="text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:10px;">可點擊地圖放大檢視完整路線</p>
+    <p style="text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:10px;">點擊地圖可放大檢視或開啟手機導航</p>
   </section>
 
 </div>
 
 <footer>
   <h3>集合資訊</h3>
-  <p>台南山上花園水道博物館</p>
-  <p>台南市山上區山上里山上16號</p>
+  <p>08:20 世界之光聖教會</p>
+  <p>09:00 台南山上花園水道博物館（台南市山上區山上里山上16號）</p>
   <p>博物館開放時間 09:30–17:30（16:30停止售票入園）</p>
   <div class="sign">祝大家騎乘愉快 🚴</div>
 </footer>
