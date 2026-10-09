@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>大內單車行程</title>
+<title>大內單車行程・善化火車站出發</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -421,12 +421,12 @@
 
 <div class="hero">
   <div class="hero-inner">
-    <div class="eyebrow">大內單車行程</div>
-    <h1>臺南山上水道博物館 ➔ 大內橋</h1>
-    <div class="hero-meta"><b>08:20</b> 世界之光聖教會集合 → <b>09:00</b> 山上水道博物館出發 · 10人以內</div>
+    <div class="eyebrow">火車＋單車雙鐵聯遊・大內單車行程</div>
+    <h1>善化火車站 ➔ 大內橋</h1>
+    <div class="hero-meta">乘火車抵達善化：<b>08:21</b>（區間快1006）或 <b>09:01</b>（區間3142）· 出發騎乘 <b>08:30 / 09:10</b> · 10人以內</div>
     <div class="stat-row">
-      <div class="stat"><span class="num">8.5–10</span><span class="label">公里・總距離</span></div>
-      <div class="stat"><span class="num">30–40</span><span class="label">公尺・總爬升</span></div>
+      <div class="stat"><span class="num">約 17</span><span class="label">公里・總距離</span></div>
+      <div class="stat"><span class="num">60–80</span><span class="label">公尺・總爬升</span></div>
       <div class="stat"><span class="num">&lt; 1%</span><span class="label">平均坡度</span></div>
     </div>
   </div>
@@ -436,6 +436,41 @@
 </div>
 
 <div class="wrap">
+
+  <!-- 火車時刻表 -->
+  <section>
+    <div class="section-head">
+      <div class="tag">火車時刻參考</div>
+      <h2>兩班北上車次，選一個出發方案</h2>
+    </div>
+
+    <table class="route">
+      <thead>
+        <tr>
+          <th>方案</th><th>車次</th><th>區間</th><th>善化抵達</th><th>開始騎乘</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="seg">A 早鳥</td>
+          <td>區間快 1006<br><span style="font-size:12.5px;color:var(--ink-soft)">潮州 → 七堵</span></td>
+          <td>臺南 08:03 發</td>
+          <td>08:21</td>
+          <td><strong>08:30</strong></td>
+        </tr>
+        <tr>
+          <td class="seg">B 悠閒</td>
+          <td>區間 3142<br><span style="font-size:12.5px;color:var(--ink-soft)">潮州 → 嘉義</span></td>
+          <td>臺南 08:32 發</td>
+          <td>09:01</td>
+          <td><strong>09:10</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="summary-line">
+      兩班次<strong>均可載運自行車</strong>（一般腳踏車需購買自行車票，摺疊車免）。其他上車站請以台鐵時刻表查詢實際發車時間，搭乘與載車規定請以台鐵公告為準。
+    </div>
+  </section>
 
   <!-- 修正後的路線地形區塊 -->
     <section>
@@ -450,31 +485,31 @@
           <line x1="40" y1="20" x2="40" y2="130" stroke="#e4ddcd" stroke-width="1"/>
           <line x1="40" y1="130" x2="660" y2="130" stroke="#e4ddcd" stroke-width="1"/>
           
-          <!-- 高度填滿區域 (修正座標) -->
-          <path d="M40,35 L282,105 L331,90 L380,105 L428,105 L640,35 L640,130 L40,130 Z"
+          <!-- 高度填滿區域：善化車站往返大內橋 -->
+          <path d="M40,37 L300,105 L340,90 L380,105 L420,105 L640,37 L640,130 L40,130 Z"
                 fill="rgba(110,140,160,0.14)"/>
           
-          <!-- 高度折線 (修正座標) -->
-          <path d="M40,35 L282,105 L331,90 L380,105 L428,105 L640,35"
+          <!-- 高度折線 -->
+          <path d="M40,37 L300,105 L340,90 L380,105 L420,105 L640,37"
                 fill="none" stroke="var(--river)" stroke-width="2.5" stroke-linejoin="round"/>
           
           <!-- 定位點 -->
-          <circle cx="40" cy="35" r="4" fill="#cf9b41"/>
-          <circle cx="282" cy="105" r="4" fill="#cf9b41"/>
-          <circle cx="331" cy="90" r="4" fill="#cf9b41"/>
+          <circle cx="40" cy="37" r="4" fill="#cf9b41"/>
+          <circle cx="300" cy="105" r="4" fill="#cf9b41"/>
+          <circle cx="340" cy="90" r="4" fill="#cf9b41"/>
           <circle cx="380" cy="105" r="4" fill="#cf9b41"/>
-          <circle cx="428" cy="105" r="4" fill="#cf9b41"/>
-          <circle cx="640" cy="35" r="4" fill="#cf9b41"/>
+          <circle cx="420" cy="105" r="4" fill="#cf9b41"/>
+          <circle cx="640" cy="37" r="4" fill="#cf9b41"/>
           
           <!-- X 軸地名標籤 -->
-          <text x="40" y="145" font-size="11" fill="#5a6270" text-anchor="middle">水道博物館</text>
-          <text x="282" y="145" font-size="11" fill="#5a6270" text-anchor="middle">大內橋</text>
-          <text x="331" y="75" font-size="11" fill="#5a6270" text-anchor="middle">堤防頂賞花</text>
-          <text x="380" y="160" font-size="11" fill="#5a6270" text-anchor="middle">石子瀨</text>
-          <text x="428" y="145" font-size="11" fill="#5a6270" text-anchor="middle">大內橋(返)</text>
-          <text x="640" y="20" font-size="11" fill="#5a6270" text-anchor="middle">水道博物館</text>
+          <text x="40" y="145" font-size="11" fill="#5a6270" text-anchor="middle">善化火車站</text>
+          <text x="300" y="145" font-size="11" fill="#5a6270" text-anchor="middle">大內橋</text>
+          <text x="340" y="75" font-size="11" fill="#5a6270" text-anchor="middle">堤防頂賞花</text>
+          <text x="380" y="162" font-size="11" fill="#5a6270" text-anchor="middle">石子瀨</text>
+          <text x="420" y="145" font-size="11" fill="#5a6270" text-anchor="middle">大內橋(返)</text>
+          <text x="640" y="22" font-size="11" fill="#5a6270" text-anchor="end">善化火車站(終)</text>
           
-          <!-- Y 軸海拔標籤 (修正刻度) -->
+          <!-- Y 軸海拔標籤 -->
           <text x="30" y="39" font-size="10" fill="#5a6270" text-anchor="end">32m</text>
           <text x="30" y="94" font-size="10" fill="#5a6270" text-anchor="end">22m</text>
           <text x="30" y="109" font-size="10" fill="#5a6270" text-anchor="end">17m</text>
@@ -485,15 +520,15 @@
       <table class="route">
         <thead>
           <tr>
-            <th>路段</th><th>區段內容</th><th>距離</th><th>坡度 trend</th>
+            <th>路段</th><th>區段內容</th><th>距離</th><th>坡度</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td class="seg">去程</td>
-            <td>水道博物館 → 大內橋（市道178線）</td>
-            <td>約 3.7 km</td>
-            <td>微幅緩下坡 (-0.3%)</td>
+            <td>善化火車站 → 大內橋（市道178線，路線距離估算）</td>
+            <td>約 7.7 km</td>
+            <td>平緩為主</td>
           </tr>
           <tr>
             <td class="seg">賞草巡禮</td>
@@ -503,13 +538,13 @@
           </tr>
           <tr>
             <td class="seg">回程</td>
-            <td>大內橋 → 水道博物館（原路折返）</td>
-            <td>約 3.8 km</td>
-            <td>微幅緩上坡 (+0.3%)</td>
+            <td>大內橋 → 善化火車站（原路折返）</td>
+            <td>約 7.7 km</td>
+            <td>平緩為主</td>
           </tr>
         </tbody>
       </table>
-      <div class="summary-line">全程海拔落差僅約 15 公尺，體感近乎平路，極適合各年齡層輕鬆騎乘。</div>
+      <div class="summary-line">含堤防與石子瀨賞草巡禮，全程約 17 公里；路線與距離為規劃估算，出發前請再以導航確認，適合輕鬆騎乘。</div>
     </section>
 
   <section>
@@ -517,6 +552,7 @@
       <div class="tag">時程表</div>
       <h2>單車行程流程</h2>
     </div>
+    <p style="font-size:14px;color:var(--ink-soft);margin-bottom:18px;">下表以<strong>方案 A（區間快1006，善化 08:21 抵達）</strong>時間排列；選<strong>方案 B（區間3142）</strong>者，全部時間往後順移約 40 分鐘。</p>
 
     <table class="schedule">
       <thead>
@@ -524,38 +560,33 @@
       </thead>
       <tbody>
         <tr>
-          <td class="s-time">08:20</td>
-          <td><div class="s-name">世界之光聖教會集合</div><div class="s-note">清點人數、裝備檢查，10人建議分兩排單車編隊，安排領騎與押隊各一人。集合完畢後一同前往山上水道博物館。</div></td>
+          <td class="s-time">08:21<br><span style="font-size:11.5px;font-weight:400;">B案 09:01</span></td>
+          <td><div class="s-name">搭火車抵達善化火車站</div><div class="s-note">A案：區間快1006／B案：區間3142。出站後在車站前廣場推車、整隊。</div></td>
           <td class="s-dist">—</td>
         </tr>
         <tr>
-          <td class="s-time">09:00</td>
-          <td><div class="s-name">抵達山上水道博物館，準備出發</div><div class="s-note">正式騎乘路線的起點，園區內有水道咖啡可先行休息補給、上洗手間。</div></td>
+          <td class="s-time">08:30<br><span style="font-size:11.5px;font-weight:400;">B案 09:10</span></td>
+          <td><div class="s-name">善化火車站出發，直騎大內橋</div><div class="s-note">清點人數、編隊（領騎與押隊各一人），依導航建議路線騎往大內橋；市道178線路段請靠右單排。</div></td>
+          <td class="s-dist">約 7.7 km</td>
+        </tr>
+        <tr>
+          <td class="s-time">09:10<br><span style="font-size:11.5px;font-weight:400;">B案 09:50</span></td>
+          <td><div class="s-name">抵達大內橋堤防賞花</div><div class="s-note">沿途行車時間依團體速度與實際路況調整；抵達後可推車上堤防，欣賞甜根子草花海。</div></td>
           <td class="s-dist">—</td>
         </tr>
         <tr>
-          <td class="s-time">09:10</td>
-          <td><div class="s-name">出發往大內橋</div><div class="s-note">沿市道178線騎行，路況平整、視野開闊，偶有農用車通過請靠右騎乘。</div></td>
-          <td class="s-dist">約 3.7 km</td>
-        </tr>
-        <tr>
-          <td class="s-time">09:35</td>
-          <td><div class="s-name">大內橋堤防賞花</div><div class="s-note">甜根子草花海正美，可將自行車推上堤防坡道騎行或停放，視野極佳。</div></td>
-          <td class="s-dist">—</td>
-        </tr>
-        <tr>
-          <td class="s-time">10:05</td>
-          <td><div class="s-name">石子瀨／大內龍貓公車站</div><div class="s-note">順遊彩繪村拍照，延伸賞花。途中會經過大內豆菜麵，若還沒吃早餐可順道墊個胃（非正式午餐地點）。</div></td>
+          <td class="s-time">09:40<br><span style="font-size:11.5px;font-weight:400;">B案 10:20</span></td>
+          <td><div class="s-name">石子瀨／大內龍貓公車站</div><div class="s-note">沿堤防賞草、順遊彩繪村拍照。大內豆菜麵可視營業狀況安排短暫停留，賣完即止。</div></td>
           <td class="s-dist">約 1.5 km</td>
         </tr>
         <tr>
-          <td class="s-time">10:35</td>
-          <td><div class="s-name">騎回水道博物館</div><div class="s-note">原路折返，微幅上坡幾乎無感。</div></td>
-          <td class="s-dist">約 3.8 km</td>
+          <td class="s-time">10:30<br><span style="font-size:11.5px;font-weight:400;">B案 11:10</span></td>
+          <td><div class="s-name">由大內橋騎回善化火車站</div><div class="s-note">原路折返，預留團體整隊與休息時間。</div></td>
+          <td class="s-dist">約 7.7 km</td>
         </tr>
         <tr>
-          <td class="s-time">11:00</td>
-          <td><div class="s-name">午餐時間</div><div class="s-note">可選擇在水道博物館園區內的水道咖啡用餐，或騎往山上市區品嚐在地小吃，兩者皆步行／短騎可達。</div></td>
+          <td class="s-time">11:10<br><span style="font-size:11.5px;font-weight:400;">B案 11:50</span></td>
+          <td><div class="s-name">返回善化火車站</div><div class="s-note">可在善化市區用餐或休息，再依返程班次搭乘南下列車。</div></td>
           <td class="s-dist">—</td>
         </tr>
       </tbody>
@@ -580,7 +611,7 @@
       <div class="notice">
         <h3>防曬與補給</h3>
         <ul>
-          <li>9月台南早上仍偏熱、紫外線強，堤防路段少遮蔭</li>
+          <li>台南日照較強，堤防路段遮蔭少，請留意防曬與補水</li>
           <li>務必準備防曬乳、袖套、遮陽帽、足量飲水</li>
           <li>建議至少2人分攜備用水或補給品</li>
         </ul>
@@ -589,7 +620,7 @@
         <h3>連假注意</h3>
         <ul>
           <li>大內豆菜麵屬順路點心，非正式午餐，若沒吃到也不影響行程</li>
-          <li>大內橋周邊停車格有限，建議直接騎乘往返</li>
+          <li>賞花花況依季節與天候而異，出發前可先確認最新資訊</li>
           <li>甜根子草最佳觀賞點在「大內橋兩側堤防頂」</li>
         </ul>
       </div>
@@ -604,19 +635,14 @@
 
     <div class="food-grid">
       <div class="food-card">
-        <h3>☕ 水道咖啡</h3>
-        <div class="place">📍 水道博物館園區內 · 午餐首選之一</div>
-        <p>位於水道博物館園區內，提供簡餐、輕食、特色冰品與冷飲。騎回起點後可直接在此舒舒適用餐與休息，不必再遠尋餐廳。</p>
-      </div>
-      <div class="food-card">
-        <h3>🍧 山上區老街美食</h3>
-        <div class="place">📍 山上區公所 / 老街（距水道博物館約 1.5 公里）· 午餐首選之一</div>
-        <p>騎回博物館後若想換個口味，可再往山上市區一帶，有許多在地麵店與剉冰店，價格實惠，能體驗農村聚落的在地風味。</p>
-      </div>
-      <div class="food-card">
         <h3>🍜 大內豆菜面（順路點心，非正式午餐）</h3>
         <div class="place">📍 大內老街區（距大內橋約 1 公里）· 多於清晨至午間營業，賣完即止</div>
-        <p>大內在地古早味傳統麵食，麵條清涼 Q 彈，淋上蒜蓉醬油。行程途中若剛好經過且還在營業，可順道墊個胃，但正式午餐建議留在水道咖啡或山上市區。</p>
+        <p>大內在地古早味傳統麵食，麵條清涼 Q 彈，淋上蒜蓉醬油。行程途中可視時間與營業狀況順道品嚐，賣完即止。</p>
+      </div>
+      <div class="food-card">
+        <h3>🍽️ 善化市區餐飲</h3>
+        <div class="place">📍 善化火車站周邊</div>
+        <p>騎回善化後可在車站周邊用午餐、補水休息，再依返程火車時刻搭車。</p>
       </div>
     </div>
   </section>
@@ -627,21 +653,20 @@
       <h2>地點與路線導覽</h2>
     </div>
 
-    <div class="map-container">
-      <!-- 若已有在 Google My Maps 自訂包含集合點與路線的地圖，替換 src 連結即可 -->
-      <iframe src="https://www.google.com/maps/d/u/0/embed?mid=11vgC70Eh3oN7UMkjpTXgsPvbrJFN2u8&ehbc=2E312F" width="640" height="480"></iframe>
-    </div>
-    <p style="text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:10px;">點擊地圖可放大檢視或開啟手機導航</p>
+    <p>路線起點為善化火車站，目的地為大內橋。點選下方連結以 Google 地圖開啟單車導航：</p>
+    <p style="text-align:center;margin-top:18px;">
+      <a href="https://www.google.com/maps/dir/?api=1&amp;origin=%E5%96%84%E5%8C%96%E7%81%AB%E8%BB%8A%E7%AB%99&amp;destination=%E5%A4%A7%E5%85%A7%E6%A9%8B&amp;travelmode=bicycling" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:var(--rust);color:#fff;text-decoration:none;padding:12px 20px;border-radius:8px;font-weight:700;">開啟善化車站至大內橋單車導航 ↗</a>
+    </p>
   </section>
 
 </div>
 
 <footer>
   <h3>集合資訊</h3>
-  <p>08:20 世界之光聖教會</p>
-  <p>09:00 台南山上花園水道博物館（台南市山上區山上里山上16號）</p>
-  <p>博物館開放時間 09:30–17:30（16:30停止售票入園）</p>
-  <div class="sign">祝大家騎乘愉快 🚴</div>
+      <p>集合與出發地點：善化火車站</p>
+      <p>方案 A 約 08:30 出發；方案 B 約 09:10 出發</p>
+      <p>騎乘往返大內橋，回善化市區用餐後搭車返程</p>
+      <div class="sign">祝大家雙鐵聯遊愉快 🚴🚆</div>
 </footer>
 
 </body>
