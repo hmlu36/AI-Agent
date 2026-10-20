@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>烤肉活動聊天話題</title>
+<meta name="description" content="邀請新朋友參加烤肉活動時，從哪裡開始聊、怎麼自然延伸到小組。給同工的參考。">
+<style>
+:root {
+  --bg: #f4f6f2; --card: #ffffff; --ink: #232826; --muted: #5d6662; --line: #d3d8d2;
+  --s1: #b8412b; --s2: #1f6f78; --s3: #5a7d2a; --s4: #6b4e9b;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #171b1a; --card: #222827; --ink: #eef1ee; --muted: #a8b1ad; --line: #38403e;
+    --s1: #e0705a; --s2: #4fb0b9; --s3: #93b85a; --s4: #a58bd6; }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Heiti TC", system-ui, sans-serif;
+  font-size: 17px; line-height: 1.85; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 48px 24px 72px; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--s2); outline-offset: 3px; }
+
+header { max-width: 720px; }
+h1 { font-size: clamp(30px, 5vw, 44px); line-height: 1.25; font-weight: 900; margin: 0 0 12px; letter-spacing: .02em; }
+.lead { color: var(--muted); margin: 0 0 6px; }
+.rules { margin: 0; font-weight: 700; }
+
+/* overview diagram */
+.overview { margin: 40px 0 8px; }
+.overview h2 { font-size: 15px; color: var(--muted); font-weight: 500; margin: 0 0 6px; }
+.fishsvg { display: none; width: 100%; height: auto; }
+.fishsvg .spine { stroke: var(--ink); stroke-width: 6; stroke-linecap: round; }
+.fishsvg .t { font-size: 19px; font-weight: 700; }
+.fishsvg .k { font-size: 14px; fill: var(--muted); }
+.fishsvg a { cursor: pointer; }
+.fishsvg a:hover .t { text-decoration: underline; }
+.stagenav { list-style: none; margin: 0; padding: 0 0 0 22px; border-left: 5px solid var(--ink); display: grid; gap: 14px; }
+.stagenav a { display: block; text-decoration: none; padding-left: 14px; border-left: 5px solid var(--c); margin-left: -27px; padding-left: 22px; }
+.stagenav b { color: var(--c); display: block; }
+.stagenav span { color: var(--muted); font-size: 14px; }
+@media (min-width: 720px) { .fishsvg { display: block; } .stagenav { display: none; } }
+
+/* picker */
+.picker { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin: 28px 0 8px; max-width: 720px; }
+.picker button { font: inherit; font-weight: 700; cursor: pointer; color: var(--bg); background: var(--ink); border: 0; border-radius: 6px; padding: 6px 18px; }
+.picker output { flex: 1 1 240px; color: var(--muted); }
+.picker output strong { color: var(--ink); display: block; font-size: 18px; }
+
+/* stages */
+.stage { max-width: 720px; margin-top: 72px; padding-left: 22px; border-left: 6px solid var(--c); scroll-margin-top: 24px; }
+#s1 { --c: var(--s1); } #s2 { --c: var(--s2); } #s3 { --c: var(--s3); } #s4 { --c: var(--s4); }
+.stage h2 { margin: 0; font-size: 28px; line-height: 1.35; color: var(--c); }
+.when { margin: 4px 0 0; color: var(--muted); }
+.stage h3 { margin: 30px 0 4px; font-size: 17px; }
+.qs { list-style: none; margin: 0; padding: 0; }
+.qs li { position: relative; padding: 6px 8px 6px 20px; border-radius: 4px; }
+.qs li::before { content: ""; position: absolute; left: 4px; top: 1.05em; width: 7px; height: 7px; border-radius: 50%; background: var(--c); }
+.qs li.picked { background: color-mix(in srgb, var(--c) 15%, transparent); }
+.qs li.tip { color: var(--muted); }
+.qs li.tip::before { background: transparent; border: 2px solid var(--c); }
+.note { margin: 28px 0 0; color: var(--muted); }
+.step { margin-top: 26px; }
+.step b { display: block; color: var(--c); }
+.step .q { padding: 2px 8px; margin: 2px -8px; border-radius: 4px; }
+.step .q.picked { background: color-mix(in srgb, var(--c) 15%, transparent); }
+.step p { margin: 2px 0 0; color: var(--muted); }
+footer { margin-top: 72px; color: var(--muted); font-size: 14px; }
+@media print { .picker { display: none; } .stage { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>烤肉活動聊天話題</h1>
+    <p class="lead">邀請新朋友來烤肉時，從哪裡開始聊，又怎麼自然延伸到小組。給同工的參考。</p>
+    <p class="rules">邊做事邊聊　先聽後說　分享自己的體驗，不推銷</p>
+  </header>
+
+  <nav class="overview" aria-label="魚骨圖總覽">
+    <h2>由左到右，對應活動的時間順序。點一下可以跳到細節。</h2>
+    <svg class="fishsvg" viewBox="0 0 1000 340" role="img" aria-label="聊天話題魚骨圖">
+      <polygon points="40,170 8,148 8,192" fill="var(--ink)"/>
+      <line class="spine" x1="40" y1="170" x2="832" y2="170"/>
+      <path d="M830 100 H890 Q992 100 992 170 Q992 240 890 240 H830 Z" fill="var(--ink)"/>
+      <circle cx="958" cy="136" r="6" fill="var(--bg)"/>
+      <text x="846" y="164" font-size="21" font-weight="700" fill="var(--bg)">新朋友</text>
+      <text x="846" y="194" font-size="21" font-weight="700" fill="var(--bg)">自然聊起來</text>
+
+      <g style="--c:var(--s1)"><a href="#s1">
+        <line x1="90" y1="78" x2="150" y2="170" stroke="var(--s1)" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="150" cy="170" r="7" fill="var(--s1)"/>
+        <text class="t" x="40" y="34" fill="var(--s1)">階段一　動作型破冰</text>
+        <text class="k" x="40" y="60">食物偏好・怎麼來的・近期生活</text></a></g>
+
+      <g><a href="#s2">
+        <line x1="300" y1="170" x2="250" y2="268" stroke="var(--s2)" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="300" cy="170" r="7" fill="var(--s2)"/>
+        <text class="t" x="230" y="296" fill="var(--s2)">階段二　用餐時的生活與興趣</text>
+        <text class="k" x="230" y="320">美食・娛樂旅行・日常個性</text></a></g>
+
+      <g><a href="#s3">
+        <line x1="520" y1="78" x2="580" y2="170" stroke="var(--s3)" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="580" cy="170" r="7" fill="var(--s3)"/>
+        <text class="t" x="470" y="34" fill="var(--s3)">階段三　連結到小組與教會</text>
+        <text class="k" x="470" y="60">從活動切入・分享小組生活</text></a></g>
+
+      <g><a href="#s4">
+        <line x1="750" y1="170" x2="700" y2="268" stroke="var(--s4)" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="750" cy="170" r="7" fill="var(--s4)"/>
+        <text class="t" x="640" y="296" fill="var(--s4)">階段三延伸　從煩惱聊到安定</text>
+        <text class="k" x="640" y="320">先聽・分享自己・讓對方回應</text></a></g>
+    </svg>
+    <ul class="stagenav">
+      <li style="--c:var(--s1)"><a href="#s1"><b>階段一　動作型破冰</b><span>食物偏好・怎麼來的・近期生活</span></a></li>
+      <li style="--c:var(--s2)"><a href="#s2"><b>階段二　用餐時的生活與興趣</b><span>美食・娛樂旅行・日常個性</span></a></li>
+      <li style="--c:var(--s3)"><a href="#s3"><b>階段三　連結到小組與教會</b><span>從活動切入・分享小組生活</span></a></li>
+      <li style="--c:var(--s4)"><a href="#s4"><b>階段三延伸　從煩惱聊到安定</b><span>先聽・分享自己・讓對方回應</span></a></li>
+    </ul>
+  </nav>
+
+  <div class="picker">
+    <button type="button" id="draw">抽一題來聊</button>
+    <output id="out" aria-live="polite">想不到要聊什麼的時候，按一下。</output>
+  </div>
+
+  <main>
+    <section class="stage" id="s1">
+      <h2>階段一　動作型破冰</h2>
+      <p class="when">剛到的前 15 分鐘壓力最高。邊做事邊聊，從眼前的食物與動作切入。</p>
+      <h3>食物偏好（最安全、零包袱）</h3>
+      <ul class="qs">
+        <li class="q">你有沒有吃過什麼特別的烤肉食材？（例如：烤吐司夾棉花糖、烤麻糬）</li>
+        <li class="q">你平常烤肉都愛吃什麼？有沒有必點的？（玉米、豆干、棉花糖……常常能聊很久）</li>
+      </ul>
+      <h3>怎麼來到這裡</h3>
+      <ul class="qs">
+        <li class="q">你是怎麼認識今天的主人／帶你來的朋友？</li>
+        <li class="q">今天一路過來順利嗎？住在哪一區？</li>
+      </ul>
+      <h3>近期生活</h3>
+      <ul class="qs">
+        <li class="q">最近幾個連假，有沒有跟家人或朋友出去玩？</li>
+      </ul>
+    </section>
+
+    <section class="stage" id="s2">
+      <h2>階段二　用餐時的生活與興趣</h2>
+      <p class="when">大家拿到食物、開始邊吃邊聊時，從日常生活延伸。</p>
+      <h3>美食與生活圈</h3>
+      <ul class="qs">
+        <li class="q">你平時在台南（或附近）最喜歡吃哪一家烤肉或燒肉店？</li>
+        <li class="q">週末除了烤肉，你平時放假最喜歡去哪裡晃晃或放空？</li>
+      </ul>
+      <h3>娛樂與旅行</h3>
+      <ul class="qs">
+        <li class="q">最近在追的劇、聽的音樂、玩的遊戲？</li>
+        <li class="q">最近一次旅行去了哪裡？下一個想去的地方？</li>
+      </ul>
+      <h3>日常與個性</h3>
+      <ul class="qs">
+        <li class="q">你平常下班或放假都喜歡做什麼？</li>
+        <li class="q">你是 I 人還是 E 人？參加這種活動會不會很快沒電？</li>
+      </ul>
+      <p class="note">避開太嚴肅或太私人的話題，例如薪水、感情狀況。</p>
+    </section>
+
+    <section class="stage" id="s3">
+      <h2>階段三　連結到小組與教會</h2>
+      <p class="when">新朋友若對小組好奇，自然、不強迫地帶入。分享自己的真實體驗，而不是推銷。</p>
+      <h3>從今晚的活動切入</h3>
+      <ul class="qs">
+        <li class="q">你今天來覺得氛圍怎麼樣？希望食物還合你的胃口！</li>
+        <li class="q">你是怎麼認識 [邀請他來的朋友名] 的呀？</li>
+      </ul>
+      <h3>自然分享小組生活</h3>
+      <ul class="qs">
+        <li class="q">我們小組平時除了聚會，也很喜歡像這樣一起吃飯聊天、戶外走走，你平時喜歡參加這類型的活動嗎？</li>
+        <li class="q">我自己蠻喜歡這個小組的感覺，因為大家平時工作都很忙，每週有一個時間可以慢下來跟大家聊聊天、放鬆一下很讚。</li>
+        <li class="tip">分享小組平常做什麼，例如「我們每週會一起吃飯聊聊近況」。</li>
+        <li class="tip">請組員簡短講一個近期的生活故事，讓新朋友看到大家是真實的人。</li>
+        <li class="tip">如果對方主動問起，再自然聊小組或信仰經驗。</li>
+      </ul>
+    </section>
+
+    <section class="stage" id="s4">
+      <h2>階段三延伸　從煩惱聊到安定</h2>
+      <p class="when">三個步驟，從生活經驗慢慢走到信仰分享。</p>
+      <div class="step">
+        <b>第一步　先聊生活經驗</b>
+        <div class="q">你平常遇到很煩的事情，都會找誰聊？</div>
+        <p>對方分享後，先聽聽他的故事，不急著給建議。</p>
+      </div>
+      <div class="step">
+        <b>第二步　分享自己的經驗</b>
+        <div class="q">我自己有時候也會想很多，後來發現跟小組的朋友聊聊，或安靜下來禱告，會讓自己比較有平安。</div>
+        <p>用自己的經驗分享，比直接告訴對方應該怎麼做更自然。</p>
+      </div>
+      <div class="step">
+        <b>第三步　讓對方自由回應</b>
+        <div class="q">那你自己有沒有什麼讓心安定下來的方法？</div>
+        <p>如果對方對信仰有興趣，可以繼續聊；如果沒有，也能回到日常話題。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>每個階段的問題都可以直接拿來用，不必全問完。</footer>
+</div>
+
+<script>
+(function () {
+  var qs = Array.prototype.slice.call(document.querySelectorAll(".q"));
+  var out = document.getElementById("out");
+  var last = null;
+  document.getElementById("draw").addEventListener("click", function () {
+    var pick;
+    do { pick = qs[Math.floor(Math.random() * qs.length)]; } while (qs.length > 1 && pick === last);
+    if (last) last.classList.remove("picked");
+    pick.classList.add("picked");
+    last = pick;
+    var stage = pick.closest(".stage").querySelector("h2").textContent;
+    out.textContent = "";
+    var t = document.createElement("strong"); t.textContent = pick.textContent.trim();
+    out.appendChild(t); out.appendChild(document.createTextNode(stage));
+  });
+})();
+</script>
+</body>
+</html>
