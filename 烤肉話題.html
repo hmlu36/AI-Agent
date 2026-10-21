@@ -1,231 +1,63 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>烤肉活動聊天話題</title>
-<meta name="description" content="邀請新朋友參加烤肉活動時，從哪裡開始聊、怎麼自然延伸到小組。給同工的參考。">
-<style>
-:root {
-  --bg: #f4f6f2; --card: #ffffff; --ink: #232826; --muted: #5d6662; --line: #d3d8d2;
-  --s1: #b8412b; --s2: #1f6f78; --s3: #5a7d2a; --s4: #6b4e9b;
-}
-@media (prefers-color-scheme: dark) {
-  :root { --bg: #171b1a; --card: #222827; --ink: #eef1ee; --muted: #a8b1ad; --line: #38403e;
-    --s1: #e0705a; --s2: #4fb0b9; --s3: #93b85a; --s4: #a58bd6; }
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--bg); color: var(--ink);
-  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Heiti TC", system-ui, sans-serif;
-  font-size: 17px; line-height: 1.85; }
-.wrap { max-width: 1080px; margin: 0 auto; padding: 48px 24px 72px; }
-a { color: inherit; }
-:focus-visible { outline: 3px solid var(--s2); outline-offset: 3px; }
-
-header { max-width: 720px; }
-h1 { font-size: clamp(30px, 5vw, 44px); line-height: 1.25; font-weight: 900; margin: 0 0 12px; letter-spacing: .02em; }
-.lead { color: var(--muted); margin: 0 0 6px; }
-.rules { margin: 0; font-weight: 700; }
-
-/* overview diagram */
-.overview { margin: 40px 0 8px; }
-.overview h2 { font-size: 15px; color: var(--muted); font-weight: 500; margin: 0 0 6px; }
-.fishsvg { display: none; width: 100%; height: auto; }
-.fishsvg .spine { stroke: var(--ink); stroke-width: 6; stroke-linecap: round; }
-.fishsvg .t { font-size: 19px; font-weight: 700; }
-.fishsvg .k { font-size: 14px; fill: var(--muted); }
-.fishsvg a { cursor: pointer; }
-.fishsvg a:hover .t { text-decoration: underline; }
-.stagenav { list-style: none; margin: 0; padding: 0 0 0 22px; border-left: 5px solid var(--ink); display: grid; gap: 14px; }
-.stagenav a { display: block; text-decoration: none; padding-left: 14px; border-left: 5px solid var(--c); margin-left: -27px; padding-left: 22px; }
-.stagenav b { color: var(--c); display: block; }
-.stagenav span { color: var(--muted); font-size: 14px; }
-@media (min-width: 720px) { .fishsvg { display: block; } .stagenav { display: none; } }
-
-/* picker */
-.picker { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin: 28px 0 8px; max-width: 720px; }
-.picker button { font: inherit; font-weight: 700; cursor: pointer; color: var(--bg); background: var(--ink); border: 0; border-radius: 6px; padding: 6px 18px; }
-.picker output { flex: 1 1 240px; color: var(--muted); }
-.picker output strong { color: var(--ink); display: block; font-size: 18px; }
-
-/* stages */
-.stage { max-width: 720px; margin-top: 72px; padding-left: 22px; border-left: 6px solid var(--c); scroll-margin-top: 24px; }
-#s1 { --c: var(--s1); } #s2 { --c: var(--s2); } #s3 { --c: var(--s3); } #s4 { --c: var(--s4); }
-.stage h2 { margin: 0; font-size: 28px; line-height: 1.35; color: var(--c); }
-.when { margin: 4px 0 0; color: var(--muted); }
-.stage h3 { margin: 30px 0 4px; font-size: 17px; }
-.qs { list-style: none; margin: 0; padding: 0; }
-.qs li { position: relative; padding: 6px 8px 6px 20px; border-radius: 4px; }
-.qs li::before { content: ""; position: absolute; left: 4px; top: 1.05em; width: 7px; height: 7px; border-radius: 50%; background: var(--c); }
-.qs li.picked { background: color-mix(in srgb, var(--c) 15%, transparent); }
-.qs li.tip { color: var(--muted); }
-.qs li.tip::before { background: transparent; border: 2px solid var(--c); }
-.note { margin: 28px 0 0; color: var(--muted); }
-.step { margin-top: 26px; }
-.step b { display: block; color: var(--c); }
-.step .q { padding: 2px 8px; margin: 2px -8px; border-radius: 4px; }
-.step .q.picked { background: color-mix(in srgb, var(--c) 15%, transparent); }
-.step p { margin: 2px 0 0; color: var(--muted); }
-footer { margin-top: 72px; color: var(--muted); font-size: 14px; }
-@media print { .picker { display: none; } .stage { break-inside: avoid; } }
-</style>
-</head>
-<body>
-<div class="wrap">
-  <header>
-    <h1>烤肉活動聊天話題</h1>
-    <p class="lead">邀請新朋友來烤肉時，從哪裡開始聊，又怎麼自然延伸到小組。給同工的參考。</p>
-    <p class="rules">邊做事邊聊　先聽後說　分享自己的體驗，不推銷</p>
-  </header>
-
-  <nav class="overview" aria-label="魚骨圖總覽">
-    <h2>由左到右，對應活動的時間順序。點一下可以跳到細節。</h2>
-    <svg class="fishsvg" viewBox="0 0 1000 340" role="img" aria-label="聊天話題魚骨圖">
-      <polygon points="40,170 8,148 8,192" fill="var(--ink)"/>
-      <line class="spine" x1="40" y1="170" x2="832" y2="170"/>
-      <path d="M830 100 H890 Q992 100 992 170 Q992 240 890 240 H830 Z" fill="var(--ink)"/>
-      <circle cx="958" cy="136" r="6" fill="var(--bg)"/>
-      <text x="846" y="164" font-size="21" font-weight="700" fill="var(--bg)">新朋友</text>
-      <text x="846" y="194" font-size="21" font-weight="700" fill="var(--bg)">自然聊起來</text>
-
-      <g style="--c:var(--s1)"><a href="#s1">
-        <line x1="90" y1="78" x2="150" y2="170" stroke="var(--s1)" stroke-width="4" stroke-linecap="round"/>
-        <circle cx="150" cy="170" r="7" fill="var(--s1)"/>
-        <text class="t" x="40" y="34" fill="var(--s1)">階段一　動作型破冰</text>
-        <text class="k" x="40" y="60">食物偏好・怎麼來的・近期生活</text></a></g>
-
-      <g><a href="#s2">
-        <line x1="300" y1="170" x2="250" y2="268" stroke="var(--s2)" stroke-width="4" stroke-linecap="round"/>
-        <circle cx="300" cy="170" r="7" fill="var(--s2)"/>
-        <text class="t" x="230" y="296" fill="var(--s2)">階段二　用餐時的生活與興趣</text>
-        <text class="k" x="230" y="320">美食・娛樂旅行・日常個性</text></a></g>
-
-      <g><a href="#s3">
-        <line x1="520" y1="78" x2="580" y2="170" stroke="var(--s3)" stroke-width="4" stroke-linecap="round"/>
-        <circle cx="580" cy="170" r="7" fill="var(--s3)"/>
-        <text class="t" x="470" y="34" fill="var(--s3)">階段三　連結到小組與教會</text>
-        <text class="k" x="470" y="60">從活動切入・分享小組生活</text></a></g>
-
-      <g><a href="#s4">
-        <line x1="750" y1="170" x2="700" y2="268" stroke="var(--s4)" stroke-width="4" stroke-linecap="round"/>
-        <circle cx="750" cy="170" r="7" fill="var(--s4)"/>
-        <text class="t" x="640" y="296" fill="var(--s4)">階段三延伸　從煩惱聊到安定</text>
-        <text class="k" x="640" y="320">先聽・分享自己・讓對方回應</text></a></g>
-    </svg>
-    <ul class="stagenav">
-      <li style="--c:var(--s1)"><a href="#s1"><b>階段一　動作型破冰</b><span>食物偏好・怎麼來的・近期生活</span></a></li>
-      <li style="--c:var(--s2)"><a href="#s2"><b>階段二　用餐時的生活與興趣</b><span>美食・娛樂旅行・日常個性</span></a></li>
-      <li style="--c:var(--s3)"><a href="#s3"><b>階段三　連結到小組與教會</b><span>從活動切入・分享小組生活</span></a></li>
-      <li style="--c:var(--s4)"><a href="#s4"><b>階段三延伸　從煩惱聊到安定</b><span>先聽・分享自己・讓對方回應</span></a></li>
-    </ul>
-  </nav>
-
-  <div class="picker">
-    <button type="button" id="draw">抽一題來聊</button>
-    <output id="out" aria-live="polite">想不到要聊什麼的時候，按一下。</output>
-  </div>
-
-  <main>
-    <section class="stage" id="s1">
-      <h2>階段一　動作型破冰</h2>
-      <p class="when">剛到的前 15 分鐘壓力最高。邊做事邊聊，從眼前的食物與動作切入。</p>
-      <h3>食物偏好（最安全、零包袱）</h3>
-      <ul class="qs">
-        <li class="q">你有沒有吃過什麼特別的烤肉食材？（例如：烤吐司夾棉花糖、烤麻糬）</li>
-        <li class="q">你平常烤肉都愛吃什麼？有沒有必點的？（玉米、豆干、棉花糖……常常能聊很久）</li>
-      </ul>
-      <h3>怎麼來到這裡</h3>
-      <ul class="qs">
-        <li class="q">你是怎麼認識今天的主人／帶你來的朋友？</li>
-        <li class="q">今天一路過來順利嗎？住在哪一區？</li>
-      </ul>
-      <h3>近期生活</h3>
-      <ul class="qs">
-        <li class="q">最近幾個連假，有沒有跟家人或朋友出去玩？</li>
-      </ul>
-    </section>
-
-    <section class="stage" id="s2">
-      <h2>階段二　用餐時的生活與興趣</h2>
-      <p class="when">大家拿到食物、開始邊吃邊聊時，從日常生活延伸。</p>
-      <h3>美食與生活圈</h3>
-      <ul class="qs">
-        <li class="q">你平時在台南（或附近）最喜歡吃哪一家烤肉或燒肉店？</li>
-        <li class="q">週末除了烤肉，你平時放假最喜歡去哪裡晃晃或放空？</li>
-      </ul>
-      <h3>娛樂與旅行</h3>
-      <ul class="qs">
-        <li class="q">最近在追的劇、聽的音樂、玩的遊戲？</li>
-        <li class="q">最近一次旅行去了哪裡？下一個想去的地方？</li>
-      </ul>
-      <h3>日常與個性</h3>
-      <ul class="qs">
-        <li class="q">你平常下班或放假都喜歡做什麼？</li>
-        <li class="q">你是 I 人還是 E 人？參加這種活動會不會很快沒電？</li>
-      </ul>
-      <p class="note">避開太嚴肅或太私人的話題，例如薪水、感情狀況。</p>
-    </section>
-
-    <section class="stage" id="s3">
-      <h2>階段三　連結到小組與教會</h2>
-      <p class="when">新朋友若對小組好奇，自然、不強迫地帶入。分享自己的真實體驗，而不是推銷。</p>
-      <h3>從今晚的活動切入</h3>
-      <ul class="qs">
-        <li class="q">你今天來覺得氛圍怎麼樣？希望食物還合你的胃口！</li>
-        <li class="q">你是怎麼認識 [邀請他來的朋友名] 的呀？</li>
-      </ul>
-      <h3>自然分享小組生活</h3>
-      <ul class="qs">
-        <li class="q">我們小組平時除了聚會，也很喜歡像這樣一起吃飯聊天、戶外走走，你平時喜歡參加這類型的活動嗎？</li>
-        <li class="q">我自己蠻喜歡這個小組的感覺，因為大家平時工作都很忙，每週有一個時間可以慢下來跟大家聊聊天、放鬆一下很讚。</li>
-        <li class="tip">分享小組平常做什麼，例如「我們每週會一起吃飯聊聊近況」。</li>
-        <li class="tip">請組員簡短講一個近期的生活故事，讓新朋友看到大家是真實的人。</li>
-        <li class="tip">如果對方主動問起，再自然聊小組或信仰經驗。</li>
-      </ul>
-    </section>
-
-    <section class="stage" id="s4">
-      <h2>階段三延伸　從煩惱聊到安定</h2>
-      <p class="when">三個步驟，從生活經驗慢慢走到信仰分享。</p>
-      <div class="step">
-        <b>第一步　先聊生活經驗</b>
-        <div class="q">你平常遇到很煩的事情，都會找誰聊？</div>
-        <p>對方分享後，先聽聽他的故事，不急著給建議。</p>
-      </div>
-      <div class="step">
-        <b>第二步　分享自己的經驗</b>
-        <div class="q">我自己有時候也會想很多，後來發現跟小組的朋友聊聊，或安靜下來禱告，會讓自己比較有平安。</div>
-        <p>用自己的經驗分享，比直接告訴對方應該怎麼做更自然。</p>
-      </div>
-      <div class="step">
-        <b>第三步　讓對方自由回應</b>
-        <div class="q">那你自己有沒有什麼讓心安定下來的方法？</div>
-        <p>如果對方對信仰有興趣，可以繼續聊；如果沒有，也能回到日常話題。</p>
-      </div>
-    </section>
-  </main>
-
-  <footer>每個階段的問題都可以直接拿來用，不必全問完。</footer>
-</div>
-
-<script>
-(function () {
-  var qs = Array.prototype.slice.call(document.querySelectorAll(".q"));
-  var out = document.getElementById("out");
-  var last = null;
-  document.getElementById("draw").addEventListener("click", function () {
-    var pick;
-    do { pick = qs[Math.floor(Math.random() * qs.length)]; } while (qs.length > 1 && pick === last);
-    if (last) last.classList.remove("picked");
-    pick.classList.add("picked");
-    last = pick;
-    var stage = pick.closest(".stage").querySelector("h2").textContent;
-    out.textContent = "";
-    var t = document.createElement("strong"); t.textContent = pick.textContent.trim();
-    out.appendChild(t); out.appendChild(document.createTextNode(stage));
-  });
-})();
-</script>
-</body>
-</html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>烤肉聊天指南</title><meta name="description" content="烤肉活動怎麼跟新朋友聊天，從破冰到信仰分享。給小組同工的快速上手指南。">
+<style>:root{--bg:#f4f6f2;--card:#fff;--ink:#232826;--muted:#5d6662;--line:#d3d8d2;--tint:#e9eee8;--s1:#b8412b;--s2:#1f6f78;--s3:#5a7d2a;--s4:#6b4e9b;--s5:#946012;--s0:#232826}
+@media(prefers-color-scheme:dark){:root:not([data-theme]){--bg:#171b1a;--card:#222827;--ink:#eef1ee;--muted:#a8b1ad;--line:#38403e;--tint:#242b29;--s1:#e0705a;--s2:#4fb0b9;--s3:#93b85a;--s4:#a58bd6;--s5:#e0b062;--s0:#eef1ee}}
+:root[data-theme=dark]{--bg:#171b1a;--card:#222827;--ink:#eef1ee;--muted:#a8b1ad;--line:#38403e;--tint:#242b29;--s1:#e0705a;--s2:#4fb0b9;--s3:#93b85a;--s4:#a58bd6;--s5:#e0b062;--s0:#eef1ee;color-scheme:dark}
+:root[data-theme=light]{color-scheme:light}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.theme{flex:none;min-height:44px;font:inherit;font-size:15px;font-weight:700;padding:0 14px;border-radius:999px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.8 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 56px}:focus-visible{outline:3px solid var(--s2);outline-offset:2px}
+header{padding:24px 0 12px}h1{margin:0;font-size:clamp(26px,7vw,38px);line-height:1.25;font-weight:900}.lead{margin:6px 0 0;color:var(--muted)}
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin:0 -16px;padding:8px 16px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}.tabs button{flex:none;min-height:44px;font:inherit;font-size:15px;font-weight:700;padding:0 16px;border-radius:999px;border:1.5px solid var(--c);background:transparent;color:var(--c);cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--c);color:var(--bg)}
+.panel{padding-top:24px;--c:var(--s0)}#ps1{--c:var(--s1)}#ps2{--c:var(--s2)}#ps3{--c:var(--s3)}#ps4{--c:var(--s4)}#ps5{--c:var(--s5)}
+.panel h2{margin:28px 0 6px;font-size:23px;line-height:1.35;color:var(--c)}.panel>h2:first-child{margin-top:0}.when{margin:0 0 14px;color:var(--muted)}
+.panel h3{margin:26px 0 4px;font-size:17px;padding-left:10px;border-left:4px solid var(--c)}
+.rules{padding-left:0;list-style:none;margin:0;display:grid;gap:10px}.rules li{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--ink);border-radius:6px;padding:10px 14px}.rules b{display:block}
+.road{list-style:none;margin:0;padding:0;display:grid;gap:10px}.road button{width:100%;text-align:left;font:inherit;background:var(--card);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:6px;padding:10px 14px;color:var(--ink);cursor:pointer}.road b{display:block;color:var(--c)}.road span{color:var(--muted);font-size:15px}
+.axis{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin:0 0 8px 52px}
+.route{list-style:none;margin:0;padding:0;position:relative}.route::before{content:"";position:absolute;left:17px;top:18px;bottom:18px;width:4px;border-radius:2px;background:var(--line)}
+.route li{position:relative;margin:0 0 12px;padding-left:52px}.route li:last-child{margin-bottom:0}
+.dot{position:absolute;left:0;top:10px;width:38px;height:38px;border-radius:50%;background:var(--c);color:var(--bg);font:700 17px/38px inherit;font-style:normal;text-align:center;border:4px solid var(--bg);box-sizing:content-box;margin:-4px}
+.route button{display:grid;grid-template-columns:1fr auto;gap:0 10px;width:100%;text-align:left;font:inherit;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;color:var(--ink);cursor:pointer}
+.route .nm{font-weight:700;color:var(--c)}.route .tm{font-size:13px;color:var(--muted);align-self:center;text-align:right}
+.route .meter{grid-column:1/-1;display:block;height:8px;border-radius:4px;background:var(--tint);margin:8px 0 6px;overflow:hidden}.route .meter em{display:block;height:100%;width:var(--d);background:var(--c);border-radius:4px}
+.route .kw{grid-column:1/-1;font-size:14px;color:var(--muted)}
+.drawbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:0 0 6px}.drawbar button,.pn button{font:inherit;font-weight:700;min-height:44px;padding:0 16px;border-radius:8px;border:0;background:var(--c);color:var(--bg);cursor:pointer}
+.drawbar output{flex:1 1 100%;font-weight:700}.drawbar output:empty{display:none}.drawbar output{background:var(--tint);border-left:5px solid var(--c);border-radius:6px;padding:10px 14px}
+.qs{list-style:none;margin:0;padding:0}.qs li{position:relative;padding:9px 4px 9px 26px;border-bottom:1px solid var(--line)}.qs li::before{content:"";position:absolute;left:6px;top:1.25em;width:7px;height:7px;border-radius:50%;background:var(--c)}
+.qs li.star::before{content:"★";background:none;width:auto;height:auto;top:.55em;left:2px;color:var(--c);font-size:16px}
+details{margin:14px 0;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:0 14px}summary{cursor:pointer;font-weight:700;padding:12px 0;min-height:44px}details[open]>summary{border-bottom:1px solid var(--line);margin-bottom:6px}details p{margin:6px 0 12px}
+.say{margin:8px 0;padding:10px 14px;background:var(--tint);border-left:5px solid var(--c);border-radius:6px}.plain{margin:6px 0 0;color:var(--muted)}.plain-list{margin:6px 0;padding-left:22px}
+.tipbox{margin:10px 0;padding:10px 14px;background:var(--tint);border-radius:6px}.tag{display:inline-block;font-size:12px;font-weight:700;line-height:1.6;padding:0 8px;margin-right:8px;border:1px solid var(--muted);border-radius:999px;color:var(--muted);vertical-align:middle}
+.pn{display:flex;justify-content:space-between;gap:10px;margin-top:36px}.pn button{background:var(--card);color:var(--ink);border:1.5px solid var(--ink)}
+@media print{.tabs,.drawbar,.pn{display:none}.panel[hidden]{display:block}}</style></head><body><div class="wrap">
+<header><div class="top"><h1>烤肉聊天指南</h1><button type="button" class="theme" id="theme" aria-label="切換白色或深色底">🌙 深色</button></div><p class="lead">從破冰到信仰分享，給同工的快速上手。每個階段先問「這三題」就夠了。</p></header>
+<nav class="tabs" role="tablist" aria-label="聊天階段"><button type="button" role="tab" id="ts0" data-go="s0" style="--c:var(--s0)" aria-selected="false">上手</button><button type="button" role="tab" id="ts1" data-go="s1" style="--c:var(--s1)" aria-selected="false">破冰</button><button type="button" role="tab" id="ts2" data-go="s2" style="--c:var(--s2)" aria-selected="false">邊吃邊聊</button><button type="button" role="tab" id="ts3" data-go="s3" style="--c:var(--s3)" aria-selected="false">同樂</button><button type="button" role="tab" id="ts4" data-go="s4" style="--c:var(--s4)" aria-selected="false">走心</button><button type="button" role="tab" id="ts5" data-go="s5" style="--c:var(--s5)" aria-selected="false">信仰</button></nav>
+<main><section class="panel" id="ps0" role="tabpanel"><h2>三個訣竅</h2>
+<ol class="rules"><li><b>先聽後說</b>多問「後來呢？」，不急著給建議。</li>
+<li><b>問完也分享自己</b>每問一題，自己也回答，對話才有來有往。</li>
+<li><b>看反應決定深度</b>對方越放鬆，就往下一階段走；對方退縮，就回到輕鬆話題。</li></ol>
+<h2>聊天路線圖</h2>
+<div class="axis"><span>話題深度</span><span>輕鬆 → 深入</span></div><ol class="route"><li style="--c:var(--s1);--d:20%"><button type="button" data-go="s1"><i class="dot" aria-hidden="true">1</i><span class="nm">階段一　動作型破冰</span><span class="tm">剛到的前 15 分鐘</span><span class="meter" aria-hidden="true"><em></em></span><span class="kw">食物・來源・近期生活</span></button></li><li style="--c:var(--s2);--d:40%"><button type="button" data-go="s2"><i class="dot" aria-hidden="true">2</i><span class="nm">階段二　邊吃邊聊</span><span class="tm">開始用餐</span><span class="meter" aria-hidden="true"><em></em></span><span class="kw">美食・日常・興趣・童年</span></button></li><li style="--c:var(--s3);--d:30%"><button type="button" data-go="s3"><i class="dot" aria-hidden="true">3</i><span class="nm">階段三　多人同樂</span><span class="tm">氣氛熱絡時</span><span class="meter" aria-hidden="true"><em></em></span><span class="kw">糗事・腦洞・小遊戲</span></button></li><li style="--c:var(--s4);--d:70%"><button type="button" data-go="s4"><i class="dot" aria-hidden="true">4</i><span class="nm">階段四　走心交流</span><span class="tm">活動尾聲、小圈圈</span><span class="meter" aria-hidden="true"><em></em></span><span class="kw">深度話題・小組生活</span></button></li><li style="--c:var(--s5);--d:100%"><button type="button" data-go="s5"><i class="dot" aria-hidden="true">5</i><span class="nm">階段五　信仰橋接</span><span class="tm">對方有共鳴時</span><span class="meter" aria-hidden="true"><em></em></span><span class="kw">壓力→安定・禱告・邀請</span></button></li></ol>
+<h2>不同的人怎麼聊 <span class="tag">補充建議</span></h2>
+<details open><summary>安靜、內向的人</summary><p>從食物或手邊的事切入，問題小而具體，一次一題，給他思考的時間。可以問「你是 I 人還是 E 人？」讓他先放鬆。</p></details>
+<details><summary>話很多的外向者</summary><p>讓他說，你專心聽，用「後來呢？」接話。之後再把話題丟給旁邊安靜的人。</p></details>
+<details><summary>有小孩的家長</summary><p>聊孩子的趣事、假日帶小朋友去哪裡放電（海生館、觀光工廠等親子景點）。</p></details>
+<details><summary>忙碌的上班族</summary><p>聊工作裡最有趣的部分、療癒美食、讓心情變好的小事。這群人常常需要「慢下來」，很適合接到階段四。</p></details>
+<details><summary>對教會有距離的人</summary><p>不急著談信仰，先當朋友。只分享自己的真實經驗，尊重他的節奏。</p></details>
+<div class="pn"><span></span><button type="button" data-go="s1">開始：階段一 →</button></div></section><section class="panel" id="ps1" role="tabpanel" hidden><h2>階段一　動作型破冰</h2><p class="when">前 15 分鐘，陌生感最高。一邊處理食材、烤肉、拿飲料，一邊從眼前的場景聊，沒有被身家調查的壓力。</p><div class="drawbar"><button type="button" class="draw">這階段抽一題</button><output aria-live="polite"></output></div><h3>先問這三題</h3><ul class="qs"><li class="q star">你平常烤肉都愛吃什麼？有沒有必點的食材？（玉米、豆干、甜不辣）</li><li class="q star">你是怎麼認識今天的主人（或帶你來的朋友）的？</li><li class="q star">今天一路過來順利嗎？你平常住在哪一區？</li></ul><details><summary>更多題目</summary><h3>現場與食物偏好</h3><ul class="qs"><li class="q">你有沒有吃過很特別的烤肉組合？（烤吐司夾棉花糖、烤麻糬包肉）</li><li class="q">你有什麼關於食物的「冷門觀點」？（香菜派 vs 反香菜派）</li><li class="q">你這輩子絕對戒不掉的食物是什麼？</li><li class="q">壓力大的時候，你的「療癒美食」是什麼？</li><li class="q">你自己煮得出來最厲害的一餐是什麼？</li></ul><h3>背景與初步連結</h3><ul class="qs"><li class="q">這一帶有推薦去哪裡嗎？</li><li class="q">最近幾個連假，有沒有跟家人或朋友出去走走？</li></ul></details><div class="pn"><span></span><button type="button" data-go="s2">下一階段 →</button></div></section><section class="panel" id="ps2" role="tabpanel" hidden><h2>階段二　邊吃邊聊</h2><p class="when">大家拿到食物後，用「習慣、品味、小故事」找共同點，確認聊不聊得來。</p><div class="drawbar"><button type="button" class="draw">這階段抽一題</button><output aria-live="polite"></output></div><div class="tipbox">問完對方，也記得分享自己的答案。</div><h3>先問這三題</h3><ul class="qs"><li class="q star">最近有沒有吃到很好吃的店？或有沒有私藏的聚餐好去處？</li><li class="q star">最近有在追什麼劇、聽什麼 Podcast？</li><li class="q star">你覺得自己是 I 人還是 E 人？參加這種多人活動會不會很快沒電？</li></ul><details><summary>更多題目</summary><h3>台南生活圈與美食</h3><ul class="qs"><li class="q">你平時在台南（或附近）最喜歡吃哪一家燒肉或火鍋？</li><li class="q">早餐店、手搖飲，你通常都固定點什麼？</li></ul><h3>日常作息與習慣</h3><ul class="qs"><li class="q">你回到家第一件做的事是什麼？在一個普通的星期二晚上 11 點，你通常在幹嘛？</li><li class="q">週末完全沒人約你，理想的一天怎麼過？宅在家派還是出門派？</li><li class="q">你是很早就把行程排好的人，還是走一步算一步的隨性派？</li><li class="q">有什麼微不足道的小事，能瞬間讓你心情變好？</li><li class="q">你永遠都會忘記帶出門的東西是什麼？</li></ul><h3>興趣與旅遊</h3><ul class="qs"><li class="q">有沒有哪部劇是你一直強推大家去看的，甚至熟到可以瘋狂引用台詞？</li><li class="q">你去過最棒的演唱會或現場活動是哪一個？你的 KTV 拿手歌是什麼？（就算平常不唱歌也算）</li><li class="q">你有沒有收集什麼東西的癖好？</li><li class="q">只要別人提起什麼話題，你就會話匣子大開、停不下來？</li><li class="q">長大後，你會想為了好玩去上一堂什麼課？有沒有想一起嘗試的新活動（桌遊、運動）？</li><li class="q">有沒有哪個去過的地方，會想推薦給所有人？下一個夢想旅遊地是哪裡？</li><li class="q">搭飛機或高鐵時，你是靠窗派還是走道派？為什麼？</li></ul><h3>工作與童年</h3><ul class="qs"><li class="q">你的工作平常主要在忙什麼？裡面最有趣的部分是什麼？</li><li class="q">撇開現在的本業，你覺得自己其實會「意外很拿手」的工作是什麼？</li><li class="q">你十歲的時候長大想當什麼？小時候沉迷的遊戲是什麼？</li><li class="q">哪種味道或哪首歌，能瞬間把你拉回童年？</li></ul><h3>有寵物或小孩</h3><ul class="qs"><li class="q">若有養寵物：聊毛小孩的趣事（如果養狗，會幫牠取什麼名字？）</li><li class="q">若有小孩：假日都帶小朋友去哪裡放電？（海生館、觀光工廠等親子景點）</li></ul></details><div class="pn"><button type="button" data-go="s1">← 上一階段</button><button type="button" data-go="s3">下一階段 →</button></div></section><section class="panel" id="ps3" role="tabpanel" hidden><h2>階段三　多人同樂</h2><p class="when">吃得差不多、氣氛熱絡時，拋出搞笑或假設性的問題，讓大家輪流分享。舊朋友先帶頭，新朋友更容易融入。</p><div class="drawbar"><button type="button" class="draw">這階段抽一題</button><output aria-live="polite"></output></div><div class="tipbox"><span class=tag>補充建議</span>不想回答的人可以跳過，大家笑的是故事，不是人。題目已先篩過，避開太隱私或容易讓新朋友尷尬的。</div><h3>先問這三題</h3><ul class="qs"><li class="q star">你做過最懶惰的一件事是什麼？（而且你還莫名引以為傲）</li><li class="q star">如果明天突然多放一天假，你第一件事會想做什麼？</li><li class="q star">如果我們是電影裡的特務團隊，你的職責是什麼？誰最可能不小心雷到大家？</li></ul><details><summary>更多題目</summary><h3>個人糗事</h3><ul class="qs"><li class="q">你曾經為了超小的事情，做出最戲劇化的反應是什麼？</li><li class="q">你傳過哪一則訊息，按下去立刻想收回？</li><li class="q">有什麼流行趨勢是你試過一次就立刻後悔的？穿過最災難的一套衣服是什麼？</li><li class="q">你曾經跌進過最冷門的網路迷因或影片深淵是什麼？</li><li class="q">你小時候說過最好笑的謊是什麼？大家還真的信了？</li><li class="q">今年到目前為止，買過最值得的一筆消費是什麼？收到什麼禮物會讓你一整年心情都超好？</li></ul><h3>朋友互動</h3><ul class="qs"><li class="q">這群朋友曾經說服你做過最荒唐的事是什麼？曾經吵過最蠢的一架是什麼？</li><li class="q">如果新朋友跟你相處一個禮拜後要形容你，他們會怎麼說？</li><li class="q">在場的人之中，你會信任誰幫你剪頭髮？</li><li class="q">如果今晚我們要組樂團，團名叫什麼？誰負責打鈴鼓？</li><li class="q">在場誰最能在恐怖片裡活到最後？誰是第一個領便當的？</li></ul><h3>假設與二選一</h3><ul class="qs"><li class="q">如果中了發票頭獎，第一件想買的東西是什麼？</li><li class="q">如果家裡失火（人和寵物都安全），你會抓著逃跑的唯一東西是什麼？</li><li class="q">如果你的人生有罐頭笑聲，哪個瞬間的笑聲會最大聲？</li></ul></details><h3>小遊戲：猜猜看，你有多了解我</h3><p class="plain">舊朋友：考大家有多了解他。新朋友：讓大家憑第一印象盲猜，猜對得分。</p><ul class="qs"><li class="q">他最常點的手搖飲是什麼？</li><li class="q">他幾點睡覺？</li><li class="q">他的隱藏才藝是什麼？</li><li class="q">他壓力大的時候會做什麼？</li><li class="q">他今年播放次數最多的歌手是誰？</li></ul><div class="pn"><button type="button" data-go="s2">← 上一階段</button><button type="button" data-go="s4">下一階段 →</button></div></section><section class="panel" id="ps4" role="tabpanel" hidden><h2>階段四　走心交流</h2><p class="when">活動尾聲，或幾個人安靜圍著聊天時，從有溫度的生活體悟切入，自然帶出小組生活。適合一對一或小圈圈。</p><div class="drawbar"><button type="button" class="draw">這階段抽一題</button><output aria-live="polite"></output></div><h3>先問這三題</h3><ul class="qs"><li class="q star">你上一次打從心底為自己感到驕傲是什麼時候？</li><li class="q star">別人對你做過最溫暖的一件事是什麼？</li><li class="q star">對你而言，「好朋友」或「好的群體」是什麼樣子？</li></ul><details><summary>更多題目</summary><h3>更多深度話題</h3><ul class="qs"><li class="q">你很慶幸自己已經擺脫了過去的哪一種樣子？</li><li class="q">你在什麼時候最能感受到「最真實的自己」？</li></ul></details><h3>自然分享小組生活</h3><p class="say">「你今天來覺得氛圍怎麼樣？希望食物還合你的胃口！」</p><p class="say">「我們小組平時除了聚會，也很喜歡像這樣一起吃飯聊天、去戶外走走，你平時喜歡參加這類型的活動嗎？」</p><p class="say">「我自己蠻喜歡這個小組的感覺，因為大家平時工作、家庭都很忙，每週有一個時間可以慢下來聊聊天、吃頓飯，關心彼此近況，真的很放鬆。」</p><div class="tipbox">請身邊的組員簡短分享一個近期的生活小故事，讓新朋友看到大家真實的相處。</div><div class="pn"><button type="button" data-go="s3">← 上一階段</button><button type="button" data-go="s5">下一階段 →</button></div></section><section class="panel" id="ps5" role="tabpanel" hidden><h2>階段五　信仰橋接</h2><p class="when">從「生活壓力」聊到「內心安定」。重點是邀請，不是說服；是分享自己的經驗，不是教導。</p><div class="drawbar"><button type="button" class="draw">這階段抽一題</button><output aria-live="polite"></output></div><h3>第一步　先聊生活經驗（傾聽為主）</h3><p class="say">「你現在心裡有沒有扛著什麼壓力？遇到很煩的事情時，你通常怎麼排解，或是希望別人怎麼陪你？」</p><p class="plain">先專注聽他的故事，不急著給建議。</p><h3>第二步　分享自己的經驗</h3><p class="say">「我自己有時候也會想很多、覺得焦慮。後來發現跟小組的朋友聊聊，或安靜下來禱告，會讓自己比較有平安，不會覺得是一個人在硬撐。」</p><h3>第三步　讓對方自由回應</h3><p class="say">「那你自己平常有沒有什麼讓心安定下來的方法？」</p><p class="plain">對方有興趣就順著聊；沒有，就自然接回他的減壓方式或日常話題。</p><h3>第四步　邀請與跟進 <span class="tag">補充建議</span></h3><p class="say">「如果你願意，我可以為這件事簡單禱告嗎？不想也完全沒關係。」</p><p class="say">「下次小組聚會你有空的話，歡迎來坐坐，就像今天一樣輕鬆。」</p><p class="plain">活動後傳一則訊息關心近況，不需要提教義。</p><h3>對方的反應怎麼接 <span class="tag">補充建議</span></h3><details open><summary>有興趣</summary><p>問「你覺得為什麼會這樣？」，分享一小段自己的經歷，不說教。</p></details><details><summary>不確定或有疑問</summary><p>不辯論。誠實說「這個問題我也想過」或「我不知道」，邀請之後再聊，或請其他同工一起陪他。</p></details><details><summary>沒興趣或婉拒</summary><p>回他「沒關係！」，自然回到日常話題。繼續當朋友，就是最好的見證。</p></details><h3>同工自己的預備 <span class="tag">補充建議</span></h3><ul class="plain-list"><li>預備一段 30 秒的分享：以前的狀況，遇到小組或禱告後的改變，現在的感受。</li><li>分工：一位陪新朋友，一位留意整體氣氛，避免多人圍著一個新朋友。</li><li>活動前，先為今天要來的新朋友禱告。</li></ul><div class="pn"><button type="button" data-go="s4">← 上一階段</button><span></span></div></section></main></div><script>(function(){var tabs=[].slice.call(document.querySelectorAll('.tabs button'));
+function show(k,push){if(!document.getElementById('p'+k))k='s0';tabs.forEach(function(b){var on=b.dataset.go===k;b.setAttribute('aria-selected',on);if(on)b.scrollIntoView({inline:'center',block:'nearest'})});
+[].forEach.call(document.querySelectorAll('.panel'),function(p){p.hidden=p.id!=='p'+k});
+if(push)history.replaceState(null,'','#'+k);window.scrollTo(0,0)}
+document.addEventListener('click',function(e){var g=e.target.closest('[data-go]');if(g){show(g.dataset.go,true);return}
+var d=e.target.closest('.draw');if(d){var p=d.closest('.panel'),q=[].slice.call(p.querySelectorAll('.q')),o=p.querySelector('output');
+var t=q[Math.floor(Math.random()*q.length)];o.textContent=t.textContent}});
+[].forEach.call(document.querySelectorAll('details>summary'),function(s){var d=s.parentNode;if(d.querySelectorAll('.q').length){s.textContent='更多題目（'+d.querySelectorAll('.q').length+' 題）'}});
+show(location.hash.slice(1)||'s0',false)})();(function(){var r=document.documentElement,b=document.getElementById('theme');
+function cur(){return r.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}
+function label(){b.textContent=cur()==='dark'?'☀️ 白色':'🌙 深色'}
+try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')r.dataset.theme=t}catch(e){}
+label();b.addEventListener('click',function(){var n=cur()==='dark'?'light':'dark';r.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}label()});})();</script></body></html>
